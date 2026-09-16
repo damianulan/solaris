@@ -2,7 +2,7 @@ import { createVuetify } from 'vuetify';
 import type { JSXComponent } from 'vuetify/lib/util/defineComponent.js';
 import { defineComponent, h, type PropType } from 'vue';
 
-export type ThemeColors = Record<string, string>;
+import type { ThemeColors } from '../lib/types';
 
 const BootstrapIcon = defineComponent({
     name: 'BootstrapIcon',
