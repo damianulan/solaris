@@ -118,7 +118,9 @@
             "merge-scripts": false
         },
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "modules/enterprise"
+            ]
         }
     },
     "config": {

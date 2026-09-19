@@ -19,11 +19,11 @@ class EnterpriseServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__.'/../config/enterprise.php' => config_path('enterprise.php'),
+            __DIR__ . '/../config/enterprise.php' => config_path('enterprise.php'),
         ], 'modularis-config');
 
         $this->publishes([
-            __DIR__.'/../config/enterprise.php' => config_path('enterprise.php'),
+            __DIR__ . '/../config/enterprise.php' => config_path('enterprise.php'),
         ], 'modularis');
 
         $this->registerCommands();
