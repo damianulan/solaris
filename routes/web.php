@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-})->name('home');
+Route::middleware('web')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+});

@@ -4,7 +4,7 @@ return [
     'colors' => [
         'background' => '#F8FAFC',
         'surface' => '#FFFFFF',
-        'primary' => '#2563EB',
+        'primary' => '#475569',
         'secondary' => '#475569',
         'accent' => '#7C3AED',
         'error' => '#DC2626',

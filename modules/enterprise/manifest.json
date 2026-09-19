@@ -1,0 +1,8 @@
+{
+    "name": "Enterprise",
+    "slug": "enterprise",
+    "description": "Enterprise module",
+    "type": "module",
+    "priority": 1,
+    "provider": "Modules\\Enterprise\\EnterpriseServiceProvider"
+}
