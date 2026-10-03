@@ -1,12 +1,12 @@
 <?php
 
 use App\Http\Middleware\HandleInertiaRequests;
-use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
-use Illuminate\Session\Middleware\StartSession;
+use Modularis\ProvidersLoader;
+use Nexus\NexusSetup;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,12 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
     )
+    ->withProviders(ProvidersLoader::load())
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
-            StartSession::class,
-            EncryptCookies::class,
             HandleInertiaRequests::class,
         ]);
+        NexusSetup::middleware($middleware);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

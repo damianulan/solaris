@@ -37,9 +37,7 @@ class HandleInertiaRequests extends Middleware
     {
         return [
             ...parent::share($request),
-            'theme' => [
-                'colors' => config('theme.colors'),
-            ],
+            'theme' => config('theme'),
         ];
     }
 }

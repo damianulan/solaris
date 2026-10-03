@@ -14,6 +14,7 @@ class EnterpriseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/enterprise.php', 'enterprise');
+        $this->app->bind('test', fn() => 'test');
     }
 
     public function boot(): void

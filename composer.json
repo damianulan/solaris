@@ -9,8 +9,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "akaunting/laravel-apexcharts": "^4.0",
         "damianulan/laravel-modularis": "dev-main",
+        "damianulan/laravel-nexus": "*",
         "damianulan/laravel-sentinel": "dev-main",
         "fakerphp/faker": "^1.23",
         "inertiajs/inertia-laravel": "^3.3",
