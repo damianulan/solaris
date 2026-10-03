@@ -1,17 +1,18 @@
 <script setup lang="ts">
-import { Link, usePage } from '@inertiajs/vue3';
-import { computed } from 'vue';
+import { Link } from '@inertiajs/vue3';
 
 import type { NavigationLink } from '../../lib/types';
 
-const props = defineProps<NavigationLink>();
-
-const page = usePage();
-const isActive = computed(() => page.url === props.href);
+defineProps<NavigationLink>();
 </script>
 
 <template>
-    <Link :href="href">
-        <v-list-item :active="isActive" :prepend-icon="icon" :title="title" active-color="accent" />
+    <Link :href="link">
+        <v-list-item density="compact"
+            :active="active"
+            :prepend-icon="icon ?? undefined"
+            :title="title"
+            color="accent"
+        />
     </Link>
 </template>

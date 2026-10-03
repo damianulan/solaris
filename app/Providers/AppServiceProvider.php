@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Nexus\Blueprints\Nav\NavigationItem;
+use Nexus\Facades\Nav\Sidebar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Sidebar::add(
+            NavigationItem::make(__('frontend.navigation.home'), 'home', 'bi-house')->setPriority(1000)
+        );
     }
 }

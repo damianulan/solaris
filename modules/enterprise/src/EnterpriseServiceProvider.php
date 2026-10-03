@@ -33,7 +33,9 @@ class EnterpriseServiceProvider extends ServiceProvider
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
-        Sidebar::add(NavigationItem::make('Enterprise', 'enterprise.index', 'bi-building'));
+        Sidebar::add(
+            NavigationItem::make(__('frontend.navigation.enterprise'), 'enterprise.index', 'bi-building')
+        );
     }
 
     public function registerCommands(): void

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import AppNavigationLink from './AppNavigationLink.vue';
+import { usePage } from '@inertiajs/vue3';
+
+import AppNavigationItem from './AppNavigationItem.vue';
 
 defineProps<{
     isOpen: boolean;
@@ -8,6 +10,8 @@ defineProps<{
 const emit = defineEmits<{
     'update:isOpen': [value: boolean];
 }>();
+
+const page = usePage();
 </script>
 
 <template>
@@ -16,8 +20,11 @@ const emit = defineEmits<{
         @update:model-value="emit('update:isOpen', $event)"
     >
         <v-list nav density="comfortable">
-            <AppNavigationLink href="/" icon="bi-house" title="Home" />
-            <AppNavigationLink href="/about" icon="bi-info-circle" title="Home" />
+            <AppNavigationItem
+                v-for="(navigationItem, index) in page.props.sidebar"
+                :key="`${navigationItem.title}-${index}`"
+                :item="navigationItem"
+            />
         </v-list>
     </v-navigation-drawer>
 </template>

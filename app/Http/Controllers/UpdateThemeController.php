@@ -20,7 +20,7 @@ final class UpdateThemeController extends Controller
         $user = $request->user();
 
         if ($user instanceof User) {
-            $user->update(['theme' => $variant]);
+            $user->updateQuietly(['theme' => $variant]);
         }
 
         return back();

@@ -24,7 +24,17 @@ export interface UserContext {
 }
 
 export interface NavigationLink {
-    href: string;
-    icon: string;
+    active: boolean;
+    icon: string | null;
+    link: string;
     title: string;
 }
+
+export interface NavigationGroup {
+    icon: string | null;
+    items: NavigationElement[];
+    priority: number;
+    title: string;
+}
+
+export type NavigationElement = NavigationLink | NavigationGroup;

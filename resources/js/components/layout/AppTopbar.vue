@@ -3,7 +3,9 @@ import { router, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 
+import { useTranslations } from '../../lib/translations';
 import type { ThemeVariant, UserContext } from '../../lib/types';
+import AppUserMenu from './AppUserMenu.vue';
 
 const props = defineProps<{
     user?: UserContext;
@@ -11,11 +13,13 @@ const props = defineProps<{
 
 const theme = useTheme();
 const page = usePage();
+const { translate } = useTranslations();
 
-const userInitial = computed(() => props.user?.name.charAt(0).toUpperCase() ?? 'G');
 const isDarkTheme = computed(() => theme.current.value.dark);
 const themeSwitcherIcon = computed(() => isDarkTheme.value ? 'bi-sun' : 'bi-moon-stars');
-const themeSwitcherLabel = computed(() => isDarkTheme.value ? 'Switch to light theme' : 'Switch to dark theme');
+const themeSwitcherLabel = computed(() => translate(
+    isDarkTheme.value ? 'frontend.theme.switch_to_light' : 'frontend.theme.switch_to_dark',
+));
 
 const switchTheme = (event: PointerEvent): void => {
     const previousVariant: ThemeVariant = isDarkTheme.value ? 'dark' : 'light';
@@ -43,30 +47,5 @@ const switchTheme = (event: PointerEvent): void => {
         @click="switchTheme"
     />
 
-    <v-menu location="bottom end">
-        <template #activator="{ props: activatorProps }">
-            <v-btn v-bind="activatorProps" icon aria-label="Open user menu">
-                <v-avatar color="primary" size="36">
-                    <span class="text-body-2">{{ userInitial }}</span>
-                </v-avatar>
-            </v-btn>
-        </template>
-
-        <v-card min-width="240">
-            <v-list>
-                <v-list-item
-                    :subtitle="user?.email ?? 'Not signed in'"
-                    :title="user?.name ?? 'Guest'"
-                    prepend-icon="bi-person-circle"
-                />
-            </v-list>
-
-            <v-divider />
-
-            <v-list density="compact" nav>
-                <v-list-item prepend-icon="bi-gear" title="Settings" disabled />
-                <v-list-item prepend-icon="bi-box-arrow-right" title="Sign out" disabled />
-            </v-list>
-        </v-card>
-    </v-menu>
+    <AppUserMenu :user="props.user" />
 </template>

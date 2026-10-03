@@ -2,17 +2,13 @@
 import { Head } from '@inertiajs/vue3';
 
 import AppLayout from '../components/layout/AppLayout.vue';
+import { useTranslations } from '../lib/translations';
+
+const { translate } = useTranslations();
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head :title="translate('frontend.home.title')" />
 
-    <AppLayout>
-        <v-card max-width="640" class="mx-auto" elevation="2">
-            <v-card-title class="text-h4 pt-6">Solaris is ready</v-card-title>
-            <v-card-text class="text-body-1">
-                Laravel, Inertia, Vue, Vuetify, TypeScript, and Vite are configured.
-            </v-card-text>
-        </v-card>
-    </AppLayout>
+    <AppLayout />
 </template>

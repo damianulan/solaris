@@ -9,12 +9,17 @@ import 'vuetify/styles';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { createApp, h, type DefineComponent } from 'vue';
 
+import { translateMessage } from './lib/translations';
 import { createVuetifyPlugin } from './plugins/vuetify';
 
 const pages = import.meta.glob<{ default: DefineComponent }>('./Pages/**/*.vue');
 
 createInertiaApp({
-    title: (title) => (title ? `${title} - ${import.meta.env.VITE_APP_NAME ?? 'Solaris'}` : 'Solaris'),
+    title: (title, page) => {
+        const appName = translateMessage(page.props.localization.messages, 'frontend.app.name');
+
+        return title ? `${title} - ${appName}` : appName;
+    },
     resolve: (name) => {
         const page = pages[`./Pages/${name}.vue`];
 

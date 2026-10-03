@@ -13,13 +13,16 @@
     <rule ref="PEAR.WhiteSpace.ScopeClosingBrace">
         <exclude name="PEAR.WhiteSpace.ScopeClosingBrace.Line"/>
     </rule>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"/>
+    </rule>
 
     <!-- Exclude directories -->
     <exclude-pattern>vendor/*</exclude-pattern>
     <exclude-pattern>lang/*</exclude-pattern>
     <exclude-pattern>routes/*</exclude-pattern>
     <exclude-pattern>tests/*</exclude-pattern>
-        
+
     <!-- Include specific directories -->
     <file>app</file>
     <file>database</file>
