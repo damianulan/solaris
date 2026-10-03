@@ -22,5 +22,6 @@ const emit = defineEmits<{
     height: 32px;
     margin-inline-start: 8px;
     width: 37px;
+    color: var(--v-theme-primary);
 }
 </style>

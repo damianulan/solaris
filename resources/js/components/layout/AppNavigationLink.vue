@@ -12,6 +12,6 @@ const isActive = computed(() => page.url === props.href);
 
 <template>
     <Link :href="href">
-        <v-list-item :active="isActive" :prepend-icon="icon" :title="title" active-color="primary" />
+        <v-list-item :active="isActive" :prepend-icon="icon" :title="title" active-color="accent" />
     </Link>
 </template>

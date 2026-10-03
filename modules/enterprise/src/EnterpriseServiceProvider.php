@@ -3,6 +3,8 @@
 namespace Modules\Enterprise;
 
 use Illuminate\Support\ServiceProvider;
+use Nexus\Blueprints\Nav\NavigationItem;
+use Nexus\Facades\Nav\Sidebar;
 
 /**
  * @author Damian Ułan <damian.ulan@protonmail.com>
@@ -28,6 +30,10 @@ class EnterpriseServiceProvider extends ServiceProvider
         ], 'modularis');
 
         $this->registerCommands();
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+
+        Sidebar::add(NavigationItem::make('Enterprise', 'enterprise.index', 'bi-building'));
     }
 
     public function registerCommands(): void

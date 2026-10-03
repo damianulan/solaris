@@ -27,7 +27,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
-            .use(createVuetifyPlugin(props.initialPage.props.theme.colors))
+            .use(createVuetifyPlugin(props.initialPage.props.theme))
             .mount(el);
     },
 });

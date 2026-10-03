@@ -17,6 +17,7 @@ const emit = defineEmits<{
     >
         <v-list nav density="comfortable">
             <AppNavigationLink href="/" icon="bi-house" title="Home" />
+            <AppNavigationLink href="/about" icon="bi-info-circle" title="Home" />
         </v-list>
     </v-navigation-drawer>
 </template>

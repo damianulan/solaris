@@ -3,7 +3,12 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Translation\FileLoader;
+use Inertia\Inertia;
 use Inertia\Middleware;
+use Nexus\Facades\Nav\Sidebar;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -35,9 +40,96 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        $theme = config('theme.inkwell');
+
         return [
             ...parent::share($request),
-            'theme' => config('theme'),
+            'theme' => [
+                ...(is_array($theme) ? $theme : []),
+                'variant' => ResolveThemeVariant::fromRequest($request)->value,
+                'updateUrl' => route('theme.update'),
+            ],
+            'sidebar' => Sidebar::toArray(),
         ];
+    }
+
+    /**
+     * Define the props that are shared once and remembered across navigations.
+     *
+     * @return array<string, mixed>
+     */
+    public function shareOnce(Request $request): array
+    {
+        $locale = app()->getLocale();
+
+        return [
+            ...parent::shareOnce($request),
+            'localization' => Inertia::once(fn (): array => [
+                'locale' => $locale,
+                'messages' => $this->translationMessages($locale),
+            ])->as("localization.{$locale}"),
+        ];
+    }
+
+    /** @return array<string, mixed> */
+    private function translationMessages(string $locale): array
+    {
+        $loader = Lang::getLoader();
+
+        if (! $loader instanceof FileLoader) {
+            return [];
+        }
+
+        $locales = array_values(array_unique([
+            app()->getFallbackLocale(),
+            $locale,
+        ]));
+
+        $messages = [];
+
+        foreach ($this->translationGroups($loader, $locales) as $group) {
+            foreach ($locales as $language) {
+                $messages[$group] = array_replace_recursive(
+                    $messages[$group] ?? [],
+                    $loader->load($language, $group),
+                );
+            }
+        }
+
+        foreach ($locales as $language) {
+            $messages = array_replace(
+                $messages,
+                $loader->load($language, '*', '*'),
+            );
+        }
+
+        return $messages;
+    }
+
+    /**
+     * @param  array<int, string>  $locales
+     * @return array<int, string>
+     */
+    private function translationGroups(FileLoader $loader, array $locales): array
+    {
+        $groups = [];
+
+        foreach ($loader->paths() as $path) {
+            foreach ($locales as $locale) {
+                $directory = "{$path}/{$locale}";
+
+                if (! File::isDirectory($directory)) {
+                    continue;
+                }
+
+                foreach (File::files($directory) as $file) {
+                    if ($file->getExtension() === 'php') {
+                        $groups[] = $file->getFilenameWithoutExtension();
+                    }
+                }
+            }
+        }
+
+        return array_values(array_unique($groups));
     }
 }

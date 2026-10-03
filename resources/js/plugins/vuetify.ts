@@ -2,7 +2,7 @@ import { createVuetify } from 'vuetify';
 import type { JSXComponent } from 'vuetify/lib/util/defineComponent.js';
 import { defineComponent, h, type PropType } from 'vue';
 
-import type { ThemeColors } from '../lib/types';
+import type { Theme } from '../lib/types';
 
 const BootstrapIcon = defineComponent({
     name: 'BootstrapIcon',
@@ -76,13 +76,17 @@ const aliases = {
     backspace: 'bi-backspace',
 };
 
-export const createVuetifyPlugin = (colors: ThemeColors) => createVuetify({
+export const createVuetifyPlugin = (theme: Theme) => createVuetify({
     theme: {
-        defaultTheme: 'solaris',
+        defaultTheme: theme.variant,
         themes: {
-            solaris: {
+            light: {
                 dark: false,
-                colors,
+                colors: theme.light,
+            },
+            dark: {
+                dark: true,
+                colors: theme.dark,
             },
         },
     },
