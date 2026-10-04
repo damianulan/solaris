@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { useTranslations } from '../../lib/translations';
 import type { NavigationElement, NavigationGroup } from '../../lib/types';
 import AppNavigationLink from './AppNavigationLink.vue';
 
@@ -14,11 +13,7 @@ const isNavigationGroup = (item: NavigationElement): item is NavigationGroup => 
 const navigationGroup = computed(() => isNavigationGroup(props.item) ? props.item : null);
 const navigationLink = computed(() => isNavigationGroup(props.item) ? null : props.item);
 
-const hasActiveItem = (items: NavigationElement[]): boolean => items.some((item) => {
-    return isNavigationGroup(item) ? hasActiveItem(item.items) : item.active;
-});
-
-const isActive = computed(() => navigationGroup.value !== null && hasActiveItem(navigationGroup.value.items));
+const isActive = computed(() => navigationGroup.value !== null && navigationGroup.value.active);
 </script>
 
 <template>
@@ -29,7 +24,8 @@ const isActive = computed(() => navigationGroup.value !== null && hasActiveItem(
                 :active="isActive"
                 :prepend-icon="navigationGroup.icon ?? undefined"
                 :title="navigationGroup.title"
-                active-color="accent"
+                :disabled="navigationGroup.disabled"
+                color="accent"
                 append-icon="bi-chevron-right"
             />
         </template>

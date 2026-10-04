@@ -8,8 +8,9 @@ use App\Http\Middleware\ResolveThemeVariant;
 use App\Http\Requests\UpdateThemeRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Nexus\Http\Controllers\BaseController;
 
-final class UpdateThemeController extends Controller
+final class UpdateThemeController extends BaseController
 {
     public function __invoke(UpdateThemeRequest $request): RedirectResponse
     {

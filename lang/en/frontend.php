@@ -5,7 +5,7 @@ return [
         'name' => 'Solaris',
     ],
     'footer' => [
-        'copyright' => '© :year Solaris',
+        'copyright' => '© :year :name',
     ],
     'home' => [
         'title' => 'Welcome',

@@ -8,7 +8,7 @@ const { translate } = useTranslations();
 </script>
 
 <template>
-    <Head :title="translate('frontend.home.title')" />
-
-    <AppLayout />
+    <AppLayout>
+            <div class="text-body-medium">Content</div>
+    </AppLayout>
 </template>

@@ -28,6 +28,7 @@ export interface NavigationLink {
     icon: string | null;
     link: string;
     title: string;
+    disabled: boolean;
 }
 
 export interface NavigationGroup {
@@ -35,6 +36,14 @@ export interface NavigationGroup {
     items: NavigationElement[];
     priority: number;
     title: string;
+    active: boolean;
+    disabled: boolean;
+}
+
+export interface Page {
+    title: string;
+    header: string | null;
+    description: string | null;
 }
 
 export type NavigationElement = NavigationLink | NavigationGroup;

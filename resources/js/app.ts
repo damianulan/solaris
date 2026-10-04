@@ -24,7 +24,7 @@ createInertiaApp({
         const page = pages[`./Pages/${name}.vue`];
 
         if (!page) {
-            throw new Error(`Inertia page "${name}" was not found.`);
+            throw new Error(`Page "${name}" was not found.`);
         }
 
         return page().then((module) => module.default);

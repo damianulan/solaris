@@ -7,12 +7,16 @@ defineProps<NavigationLink>();
 </script>
 
 <template>
-    <Link :href="link">
-        <v-list-item density="compact"
-            :active="active"
-            :prepend-icon="icon ?? undefined"
-            :title="title"
-            color="accent"
-        />
-    </Link>
+    <v-list-item density="comfortable"
+        :active="active"
+        :prepend-icon="icon ?? undefined"
+        :title="title"
+        :disabled="disabled"
+        :link="true"
+        :nav="true"
+        :href="link"
+        class="font-weight-regular"
+        prepend-gap="1rem"
+
+    />
 </template>

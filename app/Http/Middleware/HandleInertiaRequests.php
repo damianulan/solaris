@@ -9,6 +9,7 @@ use Illuminate\Translation\FileLoader;
 use Inertia\Inertia;
 use Inertia\Middleware;
 use Nexus\Facades\Nav\Sidebar;
+use Nexus\Facades\Page\Page;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -50,6 +51,7 @@ class HandleInertiaRequests extends Middleware
                 'updateUrl' => route('theme.update'),
             ],
             'sidebar' => Sidebar::toArray(),
+            'page' => Page::toArray(),
         ];
     }
 

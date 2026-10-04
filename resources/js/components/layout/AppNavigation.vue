@@ -16,6 +16,8 @@ const page = usePage();
 
 <template>
     <v-navigation-drawer
+        class="py-2"
+        fluid
         :model-value="isOpen"
         @update:model-value="emit('update:isOpen', $event)"
     >
