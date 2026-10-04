@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 import '@inertiajs/core';
-import type { Localization, NavigationElement, Theme, Page } from './lib/types';
+import type { Localization, NavigationElement, Page, Snackbar, Theme } from './lib/types';
 
 declare module '@inertiajs/core' {
     interface PageProps {
@@ -9,5 +9,6 @@ declare module '@inertiajs/core' {
         sidebar: NavigationElement[];
         theme: Theme;
         page: Page;
+        snackbars: Snackbar[];
     }
 }

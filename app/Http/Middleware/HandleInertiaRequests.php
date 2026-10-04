@@ -52,6 +52,7 @@ class HandleInertiaRequests extends Middleware
             ],
             'sidebar' => Sidebar::toArray(),
             'page' => Page::toArray(),
+            'snackbars' => fn (): array => [['color' => 'success', 'message' => "Message"]],
         ];
     }
 

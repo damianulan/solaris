@@ -4,6 +4,7 @@ import { usePage, Head } from '@inertiajs/vue3';
 import AppFooter from './AppFooter.vue';
 import AppHeader from './AppHeader.vue';
 import AppNavigation from './AppNavigation.vue';
+import AppSnackbars from './AppSnackbars.vue';
 
 const navigationStorageKey = 'solaris.navigation.isOpen';
 const storedNavigationState = window.localStorage.getItem(navigationStorageKey);
@@ -31,6 +32,7 @@ watch(isNavigationOpen, (isOpen) => {
                 <slot />
             </v-container>
         </v-main>
+        <AppSnackbars />
 
         <AppFooter />
     </v-app>

@@ -40,6 +40,25 @@ class ExampleTest extends TestCase
             ->assertJsonPath('props.theme.updateUrl', route('theme.update'));
     }
 
+    public function test_the_application_shares_session_snackbars(): void
+    {
+        $snackbars = [
+            ['message' => 'Saved successfully.', 'color' => 'success'],
+            ['message' => 'Review the remaining fields.', 'color' => 'warning'],
+        ];
+        $version = app(HandleInertiaRequests::class)->version(request());
+
+        $response = $this->withSession(['snackbars' => $snackbars])
+            ->withHeaders([
+                'X-Inertia' => 'true',
+                'X-Inertia-Version' => $version,
+            ])->get('/');
+
+        $response
+            ->assertOk()
+            ->assertJsonPath('props.snackbars', $snackbars);
+    }
+
     public function test_the_application_shares_the_active_locale_translations_with_fallbacks(): void
     {
         $translationPath = sys_get_temp_dir().'/solaris-translations-'.Str::uuid();

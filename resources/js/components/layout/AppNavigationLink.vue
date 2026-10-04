@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { Link } from '@inertiajs/vue3';
-
-import type { NavigationLink } from '../../lib/types';
+import { defineProps } from "vue";
+import type { NavigationLink } from "../../lib/types";
 
 defineProps<NavigationLink>();
 </script>
 
 <template>
-    <v-list-item density="comfortable"
+    <v-list-item
+        density="comfortable"
         :active="active"
         :prepend-icon="icon ?? undefined"
         :title="title"
@@ -17,6 +17,6 @@ defineProps<NavigationLink>();
         :href="link"
         class="font-weight-regular"
         prepend-gap="1rem"
-
+        variant="flat"
     />
 </template>
