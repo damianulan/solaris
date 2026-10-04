@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use App\ThemeVariant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -13,7 +14,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create(User::TABLE, function (Blueprint $table) {
             $table->id();
             $table->string('firstname');
             $table->string('lastname');
@@ -25,6 +26,7 @@ return new class extends Migration
             $table->string('auth')->default(AuthType::LOCAL->value);
             $table->json('ia')->nullable()->comment('Identity attributes for external auth');
             $table->string('theme')->default(ThemeVariant::Light->value);
+            $table->string('lang')->default(config('app.locale'));
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

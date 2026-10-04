@@ -62,6 +62,10 @@ class User extends Authenticatable
     use SoftDeletes;
     use Notifiable;
 
+    public const string TABLE = 'users';
+
+    protected $table = self::TABLE;
+
     protected $fillable = [
         'firstname',
         'lastname',

@@ -1,16 +1,30 @@
 {
     "agents": [
-        "codex"
+        "codex",
+        "claude_code"
     ],
     "cloud": true,
     "guidelines": true,
     "mcp": true,
     "nightwatch": false,
+    "packages": [
+        "spatie/laravel-activitylog",
+        "spatie/boost-spatie-guidelines",
+        "spatie/laravel-translatable"
+    ],
     "sail": false,
     "skills": [
         "infer-conventions",
         "deploying-to-cloud",
         "laravel-best-practices",
-        "testing-best-practices"
+        "testing-best-practices",
+        "configuring-horizon",
+        "socialite-development",
+        "inertia-vue-development",
+        "translatable-development",
+        "spatie-laravel-php-standards",
+        "eloquent-best-practices",
+        "laravel-specialist",
+        "php-pro"
     ]
 }
