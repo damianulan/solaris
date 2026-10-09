@@ -47,8 +47,9 @@ export interface Page {
 }
 
 export interface Snackbar {
-    message: string;
+    text: string;
     color: string;
+    icon?: string;
 }
 
 export type NavigationElement = NavigationLink | NavigationGroup;

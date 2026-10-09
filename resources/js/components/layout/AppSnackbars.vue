@@ -7,7 +7,7 @@ const page = usePage();
 const queue = ref<SnackbarQueueMessage[]>([]);
 
 const enqueue = () => {
-    queue.value.push(...page.props.snackbars.map(({ message, color }) => ({ text: message, color })));
+    queue.value.push(...page.props.snackbars.map(({ text, color, icon }) => ({ text, color, prependIcon: icon })));
 };
 
 onMounted(enqueue);
@@ -18,10 +18,12 @@ watch(() => page.props.snackbars, enqueue);
     <v-snackbar-queue
         v-model="queue"
         closable
+        contained
+        eager
         timeout="5000"
         :total-visible="5"
         location="top end"
-        variant="tonal"
+        variant="flat"
     >
         <template #actions="{ props }">
             <v-btn

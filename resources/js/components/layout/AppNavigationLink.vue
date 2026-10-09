@@ -15,8 +15,9 @@ defineProps<NavigationLink>();
         :link="true"
         :nav="true"
         :href="link"
+        active-class="text-accent"
         class="font-weight-regular"
         prepend-gap="1rem"
-        variant="flat"
+        variant="plain"
     />
 </template>
