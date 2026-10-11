@@ -5,6 +5,7 @@ import { ref } from 'vue';
 import AuthShell from '../../components/auth/AuthShell.vue';
 import SubmitButton from '../../components/buttons/SubmitButton.vue';
 import { useTranslations } from '../../lib/translations';
+import AppAlerts from '@/components/layout/AppAlerts.vue';
 
 const props = defineProps<{
     homeUrl: string;
@@ -36,13 +37,7 @@ function submit(): void {
     submissionError.value = null;
 
     void form.post(props.loginUrl, {
-        onSuccess: () => router.visit(props.homeUrl),
-        onHttpException: () => {
-            submissionError.value = translate('frontend.auth.login.submission_error');
-        },
-        onNetworkError: () => {
-            submissionError.value = translate('frontend.auth.common.network_error');
-        },
+        onSuccess: () => router.visit(props.homeUrl)
     });
 }
 </script>
@@ -54,17 +49,7 @@ function submit(): void {
         :title="translate('frontend.auth.login.title')"
     >
         <Head :title="translate('frontend.auth.login.head_title')" />
-
-        <v-alert
-            v-if="submissionError"
-            class="mb-5"
-            closable
-            type="error"
-            variant="tonal"
-            @click:close="submissionError = null"
-        >
-            {{ submissionError }}
-        </v-alert>
+        <AppAlerts />
 
         <form novalidate @submit.prevent="submit">
             <v-text-field

@@ -2,6 +2,7 @@
 import { useTranslations } from '../../lib/translations';
 import AppBrand from '../layout/AppBrand.vue';
 import ThemeSwitcher from '../layout/ThemeSwitcher.vue';
+import AppSnackbars from '../layout/AppSnackbars.vue';
 
 defineProps<{
     description: string;
@@ -31,6 +32,7 @@ const { translate } = useTranslations();
 
                 <section class="form-panel" aria-labelledby="auth-form-heading">
                     <ThemeSwitcher class="theme-switcher" />
+                    <AppSnackbars />
 
                     <div class="form-wrap">
                         <AppBrand class="mobile-brand" />

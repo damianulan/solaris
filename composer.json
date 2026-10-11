@@ -23,7 +23,7 @@
         "laravel/tinker": "^3.0",
         "maatwebsite/excel": "^3.1",
         "maennchen/zipstream-php": "*",
-        "opcodesio/log-viewer": " *",
+        "opcodesio/log-viewer": "^3.24",
         "phpoffice/phpspreadsheet": "^1.27",
         "phpoffice/phpword": "^1.4.0",
         "predis/predis": "^v3.4.2",
