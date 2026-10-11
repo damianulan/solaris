@@ -1,0 +1,1 @@
+import{An as e,Cn as t,Hn as n,Qn as r,an as i,wn as a}from"./theme-HFD07s0j.js";import{t as o}from"./AppLayout-BUP-SCSg.js";var s=e({__name:`Home`,setup(e){let{translate:s}=i();return(e,i)=>(n(),a(o,null,{default:r(()=>[...i[0]||=[t(`div`,{class:`text-body-medium`},`Content`,-1)]]),_:1}))}});export{s as default};
