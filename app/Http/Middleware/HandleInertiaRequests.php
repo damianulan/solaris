@@ -9,6 +9,7 @@ use Illuminate\Translation\FileLoader;
 use Inertia\Inertia;
 use Inertia\Middleware;
 use Nexus\Facades\Nav\Sidebar;
+use Nexus\Facades\Page\Alert;
 use Nexus\Facades\Page\Page;
 use Nexus\Facades\Page\Snackbar;
 
@@ -54,6 +55,7 @@ class HandleInertiaRequests extends Middleware
             'sidebar' => Sidebar::toArray(),
             'page' => Page::toArray(),
             'snackbars' => fn (): array => Snackbar::getAll(),
+            'alerts' => fn (): array => Alert::getAll(),
         ];
     }
 

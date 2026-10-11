@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
+use App\Http\Controllers\AuthController;
+use Fruitcake\LaravelDebugbar\Facades\Debugbar;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Nexus\Blueprints\Nav\NavigationItem;
 use Nexus\Facades\Nav\Sidebar;
+use Nexus\Http\Controllers\AuthController as NexusAuthController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,8 +19,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-        $loader->alias('Debugbar', \Fruitcake\LaravelDebugbar\Facades\Debugbar::class);
+        $loader = AliasLoader::getInstance();
+        $loader->alias('Debugbar', Debugbar::class);
+
+        $this->app->bind(NexusAuthController::class, AuthController::class);
     }
 
     /**

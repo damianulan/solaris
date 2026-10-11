@@ -50,6 +50,11 @@ export interface Snackbar {
     text: string;
     color: string;
     icon?: string;
+    closeable: boolean
+}
+
+export interface Alert extends Snackbar {
+    header: string | null;
 }
 
 export type NavigationElement = NavigationLink | NavigationGroup;

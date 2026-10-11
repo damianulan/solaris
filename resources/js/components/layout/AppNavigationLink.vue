@@ -18,6 +18,6 @@ defineProps<NavigationLink>();
         active-class="text-accent"
         class="font-weight-regular"
         prepend-gap="1rem"
-        variant="plain"
+        variant="tonal"
     />
 </template>

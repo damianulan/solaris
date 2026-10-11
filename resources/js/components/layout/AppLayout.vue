@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { usePage, Head } from '@inertiajs/vue3';
+import AppAlerts from './AppAlerts.vue';
 import AppFooter from './AppFooter.vue';
 import AppHeader from './AppHeader.vue';
 import AppNavigation from './AppNavigation.vue';
@@ -26,8 +27,9 @@ watch(isNavigationOpen, (isOpen) => {
             <v-container class="py-2" fluid>
                 <div v-if="page.props.page.header" class="pb-4 pt-2">
                     <div class="text-headline-large font-weight-medium text-accent">{{ page.props.page.header }}</div>
-                    <div v-if="page.props.page.description" class="text-body-small text-medium-emphasis font-italic">{{ page.props.page.description }}</div>
+                    <div v-if="page.props.page.description" class="text-body-medium text-medium-emphasis font-italic">{{ page.props.page.description }}</div>
                 </div>
+                <AppAlerts />
 
                 <slot />
             </v-container>
