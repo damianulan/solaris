@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTranslations } from '../../lib/translations';
 import AppBrand from '../layout/AppBrand.vue';
+import ThemeSwitcher from '../layout/ThemeSwitcher.vue';
 
 defineProps<{
     description: string;
@@ -29,6 +30,8 @@ const { translate } = useTranslations();
                 </section>
 
                 <section class="form-panel" aria-labelledby="auth-form-heading">
+                    <ThemeSwitcher class="theme-switcher" />
+
                     <div class="form-wrap">
                         <AppBrand class="mobile-brand" />
 
@@ -157,9 +160,17 @@ const { translate } = useTranslations();
 }
 
 .form-panel {
+    position: relative;
     display: grid;
     align-items: center;
     padding: clamp(2rem, 7vw, 7rem);
+}
+
+.theme-switcher {
+    position: absolute;
+    z-index: 1;
+    inset-block-start: 1.5rem;
+    inset-inline-end: 1.5rem;
 }
 
 .form-wrap {
