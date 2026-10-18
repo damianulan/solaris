@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Nexus\Auth\AuthorizableModel;
 use Nexus\Enums\Auth\AuthType;
 
 /**
@@ -55,12 +56,10 @@ use Nexus\Enums\Auth\AuthType;
  * @mixin \Eloquent
  */
 #[Hidden(['password', 'remember_token', 'ia'])]
-class User extends Authenticatable
+class User extends AuthorizableModel
 {
     /** @use HasFactory<UserFactory> */
     use HasFactory;
-    use SoftDeletes;
-    use Notifiable;
 
     public const string TABLE = 'users';
 

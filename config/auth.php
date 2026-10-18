@@ -40,7 +40,7 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'users_rvc',
         ],
     ],
 
@@ -62,15 +62,15 @@ return [
     */
 
     'providers' => [
+        'users_rvc' => [
+            'driver' => 'rvc',
+            'model' => env('AUTH_MODEL', User::class),
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', User::class),
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

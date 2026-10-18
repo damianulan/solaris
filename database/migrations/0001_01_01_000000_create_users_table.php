@@ -22,8 +22,7 @@ return new class extends Migration
             $table->string('username')->index()->nullable();
             $table->string('email')->index()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('token')->nullable();
+            $table->string('password')->nullable();
             $table->string('auth')->default(AuthType::LOCAL->value);
             $table->json('ia')->nullable()->comment('Identity attributes for external auth');
             $table->string('theme')->default(ThemeVariant::Light->value);

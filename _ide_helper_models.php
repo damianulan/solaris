@@ -53,10 +53,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
- * @property string|null $token
  * @property string $lang
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLang($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereToken($value)
  */
 	class User extends \Eloquent {}
 }
