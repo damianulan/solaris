@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Head, Link, router, useHttp } from '@inertiajs/vue3';
+import { Head, Link, router, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 import AuthShell from '../../components/auth/AuthShell.vue';
@@ -17,7 +17,7 @@ const props = defineProps<{
 const isPasswordVisible = ref(false);
 const submissionError = ref<string | null>(null);
 const { translate } = useTranslations();
-const form = useHttp('LoginForm', {
+const form = useForm('LoginForm', {
     email: '',
     password: '',
     remember: false,

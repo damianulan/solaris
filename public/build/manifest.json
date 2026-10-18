@@ -216,7 +216,7 @@
     ]
   },
   "resources/js/Pages/Auth/Login.vue": {
-    "file": "assets/Login-D1Grhu1G.js",
+    "file": "assets/Login-BFRX_XWW.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.vue",
     "isDynamicEntry": true,
@@ -229,7 +229,7 @@
       "_VCheckbox-CuOPTfxQ.js"
     ],
     "css": [
-      "assets/Login-BB0koPKD.css"
+      "assets/Login-C_6uNJOH.css"
     ]
   },
   "resources/js/Pages/Auth/Register.vue": {
@@ -270,7 +270,7 @@
     ]
   },
   "resources/js/Pages/Profile/Edit.vue": {
-    "file": "assets/Edit-BwPgLR-S.js",
+    "file": "assets/Edit-BPKTX3WJ.js",
     "name": "Edit",
     "src": "resources/js/Pages/Profile/Edit.vue",
     "isDynamicEntry": true,
@@ -287,7 +287,7 @@
     ]
   },
   "resources/js/app.ts": {
-    "file": "assets/app-BmSgOA6e.js",
+    "file": "assets/app-iPCpgKJJ.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,

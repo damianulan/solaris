@@ -1,0 +1,27 @@
+{
+    "preset": "psr12",
+    "in": [
+        "app",
+        "database"
+    ],
+    "rules": {
+        "binary_operator_spaces": {
+            "default": "at_least_single_space",
+            "operators": {
+                "|": "at_least_single_space"
+            }
+        },
+        "concat_space": {
+            "spacing": "one"
+        },
+        "new_with_parentheses": {
+            "anonymous_class": true,
+            "named_class": false
+        },
+        "no_unused_imports": false,
+        "types_spaces": {
+            "space": "single",
+            "space_multiple_catch": "single"
+        }
+    }
+}

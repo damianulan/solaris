@@ -32,6 +32,8 @@ services:
                 condition: service_healthy
         networks:
             - solaris
+        extra_hosts:
+            - "host.docker.internal:host-gateway"
 
     # Nginx
     nginx:

@@ -16,6 +16,9 @@
     <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing">
         <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"/>
     </rule>
+    <rule ref="PSR12">
+        <exclude name="PSR12.Classes.ClassInstantiation.MissingParentheses"/>
+    </rule>
 
     <!-- Exclude directories -->
     <exclude-pattern>vendor/*</exclude-pattern>

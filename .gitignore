@@ -5,6 +5,7 @@
 .env.production
 .phpactor.json
 .phpunit.result.cache
+.phpstorm.meta.php
 /.codex
 /.cursor/
 /.idea
@@ -21,6 +22,8 @@
 /storage/pail
 /vendor
 _ide_helper.php
+composer.phar
+composer.lock
 Homestead.json
 Homestead.yaml
 Thumbs.db

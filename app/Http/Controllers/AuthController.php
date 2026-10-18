@@ -11,9 +11,9 @@ use Nexus\Http\Controllers\AuthController as NexusAuthController;
 
 final class AuthController extends NexusAuthController
 {
-    public function loginForm(): Response
+    public function loginForm(): mixed
     {
-        return $this->renderPage('Auth/Login', [
+        return Inertia::render('Auth/Login', [
             'homeUrl' => route('home'),
             'loginUrl' => route('login.store'),
             'passwordRequestUrl' => route('password.request'),

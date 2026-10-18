@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'users_api' => [
+        'url' => env('USERS_API_URL'),
+        'token' => env('USERS_API_TOKEN'),
+    ],
 ];
