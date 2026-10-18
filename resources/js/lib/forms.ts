@@ -66,11 +66,18 @@ interface FormFileItem extends FormItemBase<'file', File | File[] | null> {
     showSize?: boolean;
 }
 
+interface FormFilepondItem extends FormItemBase<'filepond', null | string> {
+    acceptedFileTypes: readonly string[];
+    maxFileSize: string;
+    serverUrl: string;
+}
+
 export type FormItem =
     | FormBooleanItem
     | FormChoiceItem
     | FormDateItem
     | FormFileItem
+    | FormFilepondItem
     | FormNumberItem
     | FormRangeItem
     | FormSelectItem

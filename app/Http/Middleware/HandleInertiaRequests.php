@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\AuthResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Lang;
@@ -47,6 +49,7 @@ class HandleInertiaRequests extends Middleware
 
         return [
             ...parent::share($request),
+            'auth.user' => fn (): ?array => $this->authenticatedUser($request),
             'theme' => [
                 ...(is_array($theme) ? $theme : []),
                 'variant' => ResolveThemeVariant::fromRequest($request)->value,
@@ -57,6 +60,18 @@ class HandleInertiaRequests extends Middleware
             'snackbars' => fn (): array => Snackbar::getAll(),
             'alerts' => fn (): array => Alert::getAll(),
         ];
+    }
+
+    /** @return array{id: int, name: string, email: string|null, avatarUrl: string|null, profileUrl: string}|null */
+    private function authenticatedUser(Request $request): ?array
+    {
+        $user = $request->user();
+
+        if (! $user instanceof User) {
+            return null;
+        }
+
+        return AuthResource::make($user)->resolve($request);
     }
 
     /**

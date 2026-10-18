@@ -54,7 +54,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
  * @property string $lang
+ * @property string $timezone
+ * @property string|null $bio
+ * @property string|null $suspended_at
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereBio($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereSuspendedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTimezone($value)
  */
 	class User extends \Eloquent {}
 }

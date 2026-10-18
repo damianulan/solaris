@@ -5,6 +5,7 @@ import { computed } from 'vue';
 import type { FormItem, FormSchema, FormValue, FormValues } from '../../lib/forms';
 import ResetButton from '../buttons/ResetButton.vue';
 import SubmitButton from '../buttons/SubmitButton.vue';
+import FilepondInput from './FilepondInput.vue';
 
 const props = defineProps<{
     schema: FormSchema;
@@ -48,6 +49,12 @@ function numberValue(name: string): number | undefined {
     const value = form[name];
 
     return typeof value === 'number' ? value : undefined;
+}
+
+function stringValue(name: string): string | null {
+    const value = form[name];
+
+    return typeof value === 'string' ? value : null;
 }
 
 function setValue(item: FormItem, value: unknown): void {
@@ -218,6 +225,20 @@ function reset(): void {
                     :show-size="item.showSize"
                     variant="outlined"
                     @update:model-value="setFileValue(item, $event)"
+                />
+
+                <FilepondInput
+                    v-else-if="item.type === 'filepond'"
+                    :accepted-file-types="item.acceptedFileTypes"
+                    :clear="form.recentlySuccessful"
+                    :error-messages="errorMessages(item.name)"
+                    :hint="item.hint"
+                    :label="item.label"
+                    :max-file-size="item.maxFileSize"
+                    :model-value="stringValue(item.name)"
+                    :name="item.name"
+                    :server-url="item.serverUrl"
+                    @update:model-value="setValue(item, $event)"
                 />
 
                 <v-text-field

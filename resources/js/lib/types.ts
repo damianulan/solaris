@@ -18,9 +18,16 @@ export interface Localization {
     messages: Record<string, TranslationValue>;
 }
 
-export interface UserContext {
+export interface AuthUser {
+    avatarUrl: string | null;
+    id: number;
     name: string;
-    email?: string;
+    email: string | null;
+    profileUrl: string;
+}
+
+export interface AuthContext {
+    user: AuthUser | null;
 }
 
 export interface NavigationLink {

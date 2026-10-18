@@ -7,8 +7,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Nexus\Enums\Auth\AuthType;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -27,7 +26,11 @@ return new class extends Migration
             $table->json('ia')->nullable()->comment('Identity attributes for external auth');
             $table->string('theme')->default(ThemeVariant::Light->value);
             $table->string('lang')->default(config('app.locale'));
+            $table->string('timezone')->default(config('app.timezone'));
+            $table->text('bio')->nullable();
+            $table->string('avatar')->nullable();
             $table->rememberToken();
+            $table->timestamp('suspended_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

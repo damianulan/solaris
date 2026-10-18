@@ -4,11 +4,7 @@ import { computed } from 'vue';
 import { useTheme } from 'vuetify';
 
 import { useTranslations } from '../../lib/translations';
-import type { ThemeVariant, UserContext } from '../../lib/types';
-
-const props = defineProps<{
-    user?: UserContext;
-}>();
+import type { ThemeVariant } from '../../lib/types';
 
 const theme = useTheme();
 const page = usePage();

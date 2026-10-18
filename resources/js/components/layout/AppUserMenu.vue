@@ -1,16 +1,14 @@
 <script setup lang="ts">
+import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 import { useTranslations } from '../../lib/translations';
-import type { UserContext } from '../../lib/types';
 
-const props = defineProps<{
-    user?: UserContext;
-}>();
-
+const page = usePage();
 const { translate } = useTranslations();
 
-const userInitial = computed(() => (props.user?.name ?? translate('frontend.user.guest')).charAt(0).toUpperCase());
+const user = computed(() => page.props.auth.user);
+const userInitial = computed(() => (user.value?.name ?? translate('frontend.user.guest')).charAt(0).toUpperCase());
 </script>
 
 <template>
@@ -22,7 +20,13 @@ const userInitial = computed(() => (props.user?.name ?? translate('frontend.user
                 icon
             >
                 <v-avatar color="primary" size="36">
-                    <span class="text-body-2">{{ userInitial }}</span>
+                    <v-img
+                        v-if="user?.avatarUrl"
+                        :alt="user.name"
+                        :src="user.avatarUrl"
+                        cover
+                    />
+                    <span v-else class="text-body-2">{{ userInitial }}</span>
                 </v-avatar>
             </v-btn>
         </template>
@@ -40,9 +44,11 @@ const userInitial = computed(() => (props.user?.name ?? translate('frontend.user
 
             <v-list density="compact" nav>
                 <v-list-item
-                    :title="translate('frontend.user.settings')"
-                    prepend-icon="bi-gear"
-                    disabled
+                    v-if="user"
+                    :href="user.profileUrl"
+                    :tag="Link"
+                    :title="translate('frontend.user.profile')"
+                    prepend-icon="bi-person"
                 />
                 <v-list-item
                     :title="translate('frontend.user.sign_out')"
