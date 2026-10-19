@@ -7,14 +7,12 @@ use App\ThemeVariant;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Nexus\Auth\AuthorizableModel;
 use Nexus\Enums\Auth\AuthType;
 
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $firstname
  * @property string $lastname
  * @property string|null $middlename
@@ -61,6 +59,7 @@ use Nexus\Enums\Auth\AuthType;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTimezone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
@@ -76,6 +75,7 @@ class User extends AuthorizableModel
     protected $table = self::TABLE;
 
     protected $fillable = [
+        'uuid',
         'firstname',
         'lastname',
         'middlename',
