@@ -26,7 +26,7 @@ return new class () extends Migration {
             $table->string('auth')->default(AuthType::LOCAL->value);
             $table->json('ia')->nullable()->comment('Identity attributes for external auth');
             $table->string('theme')->default(ThemeVariant::Light->value);
-            $table->string('lang')->default(config('app.locale'));
+            $table->string('locale')->default(config('app.locale'));
             $table->string('timezone')->default(config('app.timezone'));
             $table->text('bio')->nullable();
             $table->string('avatar')->nullable();

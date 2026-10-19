@@ -23,7 +23,7 @@ use Nexus\Enums\Auth\AuthType;
  * @property AuthType $auth
  * @property array<array-key, mixed>|null $ia Identity attributes for external auth
  * @property ThemeVariant $theme
- * @property string $lang
+ * @property string $locale
  * @property string $timezone
  * @property string|null $bio
  * @property string|null $avatar
@@ -49,7 +49,7 @@ use Nexus\Enums\Auth\AuthType;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereFirstname($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIa($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLocale($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastname($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereMiddlename($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
@@ -82,7 +82,7 @@ class User extends AuthorizableModel
         'username',
         'email',
         'password',
-        'lang',
+        'locale',
         'timezone',
         'bio',
         'avatar',
