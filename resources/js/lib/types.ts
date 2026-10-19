@@ -24,6 +24,7 @@ export interface AuthUser {
     name: string;
     email: string | null;
     profileUrl: string;
+    logoutUrl: string;
 }
 
 export interface AuthContext {

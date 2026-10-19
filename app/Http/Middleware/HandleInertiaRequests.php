@@ -62,7 +62,7 @@ class HandleInertiaRequests extends Middleware
         ];
     }
 
-    /** @return array{id: int, name: string, email: string|null, avatarUrl: string|null, profileUrl: string}|null */
+    /** @return array{id: int, name: string, email: string|null, avatarUrl: string|null, profileUrl: string, logoutUrl: string}|null */
     private function authenticatedUser(Request $request): ?array
     {
         $user = $request->user();
@@ -71,7 +71,7 @@ class HandleInertiaRequests extends Middleware
             return null;
         }
 
-        return AuthResource::make($user)->resolve($request);
+        return AuthResource::make($user)->toArray($request);
     }
 
     /**

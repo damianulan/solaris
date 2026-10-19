@@ -7,7 +7,9 @@ namespace App\Http\Resources;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
+use RuntimeException;
 
 /** @mixin User */
 final class AuthResource extends JsonResource
@@ -19,6 +21,7 @@ final class AuthResource extends JsonResource
      *     email: string|null,
      *     avatarUrl: string|null,
      *     profileUrl: string,
+     *     logoutUrl: string,
      * }
      */
     public function toArray(Request $request): array
@@ -27,10 +30,25 @@ final class AuthResource extends JsonResource
             'id' => $this->id,
             'name' => trim("{$this->firstname} {$this->lastname}"),
             'email' => $this->email,
-            'avatarUrl' => $this->avatar === null
-                ? null
-                : Storage::disk((string) config('filepond.disk', 'public'))->url($this->avatar),
+            'avatarUrl' => $this->avatarUrl(),
             'profileUrl' => route('profile.edit'),
+            'logoutUrl' => route('logout'),
         ];
+    }
+
+    private function avatarUrl(): ?string
+    {
+        if (! is_string($this->avatar)) {
+            return null;
+        }
+
+        $diskName = config('filepond.disk', 'public');
+        $disk = Storage::disk(is_string($diskName) ? $diskName : 'public');
+
+        if (! $disk instanceof FilesystemAdapter) {
+            throw new RuntimeException('The avatar disk must support URL generation.');
+        }
+
+        return $disk->url($this->avatar);
     }
 }

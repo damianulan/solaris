@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Link, usePage } from '@inertiajs/vue3';
+import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 import { useTranslations } from '../../lib/translations';
@@ -9,6 +9,14 @@ const { translate } = useTranslations();
 
 const user = computed(() => page.props.auth.user);
 const userInitial = computed(() => (user.value?.name ?? translate('frontend.user.guest')).charAt(0).toUpperCase());
+
+function logout(): void {
+    if (!user.value) {
+        return;
+    }
+
+    router.post(user.value.logoutUrl);
+}
 </script>
 
 <template>
@@ -51,9 +59,10 @@ const userInitial = computed(() => (user.value?.name ?? translate('frontend.user
                     prepend-icon="bi-person"
                 />
                 <v-list-item
+                    v-if="user"
                     :title="translate('frontend.user.sign_out')"
                     prepend-icon="bi-box-arrow-right"
-                    disabled
+                    @click="logout"
                 />
             </v-list>
         </v-card>
