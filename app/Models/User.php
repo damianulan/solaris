@@ -88,6 +88,7 @@ class User extends AuthorizableModel
         'avatar',
         'theme',
         'auth',
+        'suspended_at',
     ];
 
     /**
@@ -103,6 +104,7 @@ class User extends AuthorizableModel
             'theme' => ThemeVariant::class,
             'auth' => AuthType::class,
             'ia' => 'array',
+            'suspended_at' => 'datetime',
         ];
     }
 }

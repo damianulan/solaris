@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
     Route::get('/reset-password/{token}', [AuthController::class, 'resetPasswordPage'])->middleware('guest')->name('password.reset');
-    Route::get('/', [HomeController::class, 'index'])->name('home')->header('Home')->description('Welcome to Solaris');
-
-    Route::middleware('auth')->group(function () {
+    Route::middleware('nexus.auth')->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home')->header('Home')->description('Welcome to Solaris');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->header('Edit profile')->description('Update your profile details');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     });
