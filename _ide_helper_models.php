@@ -14,6 +14,7 @@
 namespace App\Models{
 /**
  * @property int $id
+ * @property string $uuid
  * @property string $firstname
  * @property string $lastname
  * @property string|null $middlename
@@ -24,7 +25,7 @@ namespace App\Models{
  * @property AuthType $auth
  * @property array<array-key, mixed>|null $ia Identity attributes for external auth
  * @property ThemeVariant $theme
- * @property string $lang
+ * @property string $locale
  * @property string $timezone
  * @property string|null $bio
  * @property string|null $avatar
@@ -50,7 +51,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereFirstname($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereIa($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLang($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLocale($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereLastname($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereMiddlename($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
@@ -60,11 +61,11 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereTimezone($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUsername($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
- * @property string $uuid
- * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUuid($value)
+ * @method static \Nexus\Auth\Builders\UserBuilder<static>|User authorizable()
  */
 	class User extends \Eloquent {}
 }
