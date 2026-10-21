@@ -116,6 +116,7 @@ function loadTable(options: DataTableOptions): void {
 <template>
     <v-card border flat>
         <v-data-table-server
+            class="data-table"
             :headers="headers"
             :items="table.paginator.data"
             :items-length="table.paginator.total"
@@ -134,7 +135,6 @@ function loadTable(options: DataTableOptions): void {
             v-model:sort-by="sortBy"
             must-sort
             fixed-header
-            striped="odd"
             show-first-last-page
             @update:options="loadTable"
         >
@@ -148,3 +148,16 @@ function loadTable(options: DataTableOptions): void {
         </v-data-table-server>
     </v-card>
 </template>
+
+<style scoped>
+.data-table :deep(.v-table__wrapper > table > thead > tr > th) {
+    background: color-mix(in srgb, rgb(var(--v-theme-surface)) 90%, black);
+    border: 0;
+    border-bottom: 2px solid rgba(var(--v-border-color), calc(var(--v-border-opacity) * 2));
+    box-shadow: none;
+}
+
+.data-table :deep(.v-table__wrapper > table > tbody > tr:hover > td) {
+    background: color-mix(in srgb, rgb(var(--v-theme-primary)) 25%, white);
+}
+</style>

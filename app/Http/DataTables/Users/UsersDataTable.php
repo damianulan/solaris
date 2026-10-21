@@ -58,8 +58,9 @@ class UsersDataTable extends DataTableBlueprint
     protected function columns(): array
     {
         return [
-            new DataColumn('fullname', $this->label('frontend.data_table.columns.fullname')),
-            new DataColumn('email', $this->label('frontend.data_table.columns.email')),
+            new DataColumn('selectable')->selectable(),
+            new DataColumn('fullname')->label($this->label('frontend.data_table.columns.fullname')),
+            new DataColumn('email')->label($this->label('frontend.data_table.columns.email')),
         ];
     }
 
