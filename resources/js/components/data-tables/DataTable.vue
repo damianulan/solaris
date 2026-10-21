@@ -4,7 +4,7 @@ import { computed, ref } from 'vue';
 import type { DataTableHeader } from 'vuetify';
 
 import { useTranslations } from '../../lib/translations';
-import type { DataTableBlueprint } from '../../lib/types';
+import type { DataTableBlueprint, DataTableColumn } from '../../lib/types';
 
 interface DataTableOptions {
     page: number;
@@ -25,7 +25,7 @@ const { translate } = useTranslations();
 const page = usePage();
 const isLoading = ref(false);
 const headers = computed<DataTableHeader[]>(() => props.table.columns.map((column) => ({
-    align: column.alignment === 'right' ? 'end' : column.alignment === 'center' ? 'center' : 'start',
+    align: resolveAlignment(column.alignment),
     key: column.name,
     sortable: column.sortable,
     title: column.label,
@@ -35,6 +35,18 @@ const itemsPerPageOptions = computed(() => props.table.pagination.map((value) =>
     ? { title: translate('frontend.data_table.all_items'), value }
     : value));
 const sortBy = ref<DataTableSortItem[]>(initialSort());
+
+function resolveAlignment(alignment: DataTableColumn['alignment']): DataTableHeader['align'] {
+    if (alignment === 'right') {
+        return 'end';
+    }
+
+    if (alignment === 'center') {
+        return 'center';
+    }
+
+    return 'start';
+}
 
 function initialSort(): DataTableSortItem[] {
     const parameters = queryParameters();
@@ -104,7 +116,6 @@ function loadTable(options: DataTableOptions): void {
 <template>
     <v-card border flat>
         <v-data-table-server
-            color="primary"
             :headers="headers"
             :items="table.paginator.data"
             :items-length="table.paginator.total"
@@ -123,6 +134,7 @@ function loadTable(options: DataTableOptions): void {
             v-model:sort-by="sortBy"
             must-sort
             fixed-header
+            striped="odd"
             show-first-last-page
             @update:options="loadTable"
         >
