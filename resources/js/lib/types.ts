@@ -65,4 +65,24 @@ export interface Alert extends Snackbar {
     header: string | null;
 }
 
+export interface DataTableColumn {
+    name: string;
+    label: string;
+    sortable: boolean;
+    alignment: 'left' | 'center' | 'right';
+}
+
+export interface DataTablePaginator {
+    current_page: number;
+    data: Record<string, unknown>[];
+    per_page: number;
+    total: number;
+}
+
+export interface DataTableBlueprint {
+    columns: DataTableColumn[];
+    paginator: DataTablePaginator;
+    pagination: number[];
+}
+
 export type NavigationElement = NavigationLink | NavigationGroup;

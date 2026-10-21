@@ -74,6 +74,22 @@ return [
             'title' => 'Wybierz nowe hasło',
         ],
     ],
+    'data_table' => [
+        'all_items' => 'Wszystkie',
+        'columns' => [
+            'email' => 'Email',
+            'fullname' => 'Imię i nazwisko',
+        ],
+        'empty_value' => '-',
+        'first_page' => 'Pierwsza strona',
+        'items_per_page' => 'Elementów na stronę:',
+        'last_page' => 'Ostatnia strona',
+        'loading' => 'Ładowanie danych...',
+        'next_page' => 'Następna strona',
+        'no_data' => 'Brak danych',
+        'page_text' => '{0}-{1} z {2}',
+        'previous_page' => 'Poprzednia strona',
+    ],
     'footer' => [
         'copyright' => '© :year :name',
     ],

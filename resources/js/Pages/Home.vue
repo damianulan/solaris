@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-
+import DataTable from '../components/data-tables/DataTable.vue';
 import AppLayout from '../components/layout/AppLayout.vue';
-import { useTranslations } from '../lib/translations';
+import type { DataTableBlueprint } from '../lib/types';
 
-const { translate } = useTranslations();
+defineProps<{
+    table: DataTableBlueprint;
+}>();
 </script>
 
 <template>
     <AppLayout>
-            <div class="text-body-medium">Content</div>
+        <DataTable :table="table" />
     </AppLayout>
 </template>

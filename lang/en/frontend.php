@@ -74,6 +74,22 @@ return [
             'title' => 'Choose a new password',
         ],
     ],
+    'data_table' => [
+        'all_items' => 'All',
+        'columns' => [
+            'email' => 'Email',
+            'fullname' => 'Full name',
+        ],
+        'empty_value' => '-',
+        'first_page' => 'First page',
+        'items_per_page' => 'Items per page:',
+        'last_page' => 'Last page',
+        'loading' => 'Loading items...',
+        'next_page' => 'Next page',
+        'no_data' => 'No data available',
+        'page_text' => '{0}-{1} of {2}',
+        'previous_page' => 'Previous page',
+    ],
     'footer' => [
         'copyright' => '© :year :name',
     ],
