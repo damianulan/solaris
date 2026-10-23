@@ -25,7 +25,8 @@ const isActive = computed(() => navigationGroup.value !== null && navigationGrou
             <v-list-item
                 v-bind="activatorProps"
                 :active="isActive"
-                color="accent"
+                active-class="bg-topbar"
+                color="#FFFFFF"
                 density="comfortable"
                 :disabled="navigationGroup.disabled"
                 :prepend-icon="navigationGroup.icon ?? undefined"

@@ -14,14 +14,14 @@ const emit = defineEmits<{
     <v-app-bar
         border="b"
         class="px-1 px-sm-3"
-        color="surface"
+        color="topbar"
         elevation="0"
     >
         <v-app-bar-nav-icon
             :aria-label="translate('frontend.navigation.toggle')"
-            color="primary"
+            color="brand"
             icon="bi-list"
-            variant="tonal"
+            variant="text"
             @click="emit('toggleNavigation')"
         />
 

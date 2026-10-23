@@ -9,13 +9,6 @@ use Nexus\Http\Middleware\Inertia\InertiaMiddleware;
 
 class HandleInertiaRequests extends InertiaMiddleware
 {
-    /**
-     * Define the props that are shared by default.
-     *
-     * @see https://inertiajs.com/shared-data
-     *
-     * @return array<string, mixed>
-     */
     public function share(Request $request): array
     {
         return [
@@ -37,7 +30,6 @@ class HandleInertiaRequests extends InertiaMiddleware
         return $banner;
     }
 
-    /** @return array{id: int, name: string, email: string|null, avatarUrl: string|null, profileUrl: string, logoutUrl: string}|null */
     private function authenticatedUser(Request $request): ?array
     {
         $user = $request->user();

@@ -20,26 +20,31 @@ watch(() => page.props.snackbars, enqueue);
     <v-snackbar-queue
         v-model="queue"
         contained
+        :content-props="{ style: { border: '3px solid currentColor' } }"
         eager
-        timeout="8000"
-        :total-visible="5"
+        timeout="100000"
+        :total-visible="10"
         :max-width="500"
+        :rounded="false"
         location="top end"
-        variant="flat"
+        variant="tonal"
     >
         <template #text="{ item }">
             <span class="font-weight-bold">{{ snackbarText(item) }}</span>
         </template>
 
-        <template #actions="{ props }">
-            <v-btn
-                v-bind="props"
-                aria-label="Dismiss"
-                icon="bi-x-lg"
-                size="small"
-                title="Dismiss"
-                variant="text"
-            />
+        <template #actions="{ props: actionProps }">
+            <v-tooltip location="start" text="Dismiss">
+                <template #activator="{ props: tooltipProps }">
+                    <v-btn
+                        v-bind="{ ...actionProps, ...tooltipProps }"
+                        aria-label="Dismiss"
+                        icon="bi-x-lg"
+                        size="small"
+                        variant="text"
+                    />
+                </template>
+            </v-tooltip>
         </template>
     </v-snackbar-queue>
 </template>

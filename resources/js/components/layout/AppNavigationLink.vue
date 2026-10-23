@@ -11,8 +11,9 @@ defineProps<NavigationLink>();
     <Link
         :as="VListItem"
         :active="active"
+        active-class="bg-primary"
         :aria-current="active ? 'page' : undefined"
-        color="accent"
+        color="#FFFFFF"
         density="comfortable"
         :disabled="disabled"
         :href="link"
@@ -22,7 +23,7 @@ defineProps<NavigationLink>();
         prefetch
         :prepend-icon="icon ?? undefined"
         prepend-gap="1rem"
-        rounded="lg"
+        :rounded="false"
         :title="title"
         variant="text"
         view-transition

@@ -35,10 +35,14 @@ const switchTheme = (event: PointerEvent): void => {
 </script>
 
 <template>
-    <v-btn
-        :aria-label="themeSwitcherLabel"
-        :icon="themeSwitcherIcon"
-        :title="themeSwitcherLabel"
-        @click="switchTheme"
-    />
+    <v-tooltip location="bottom" :text="themeSwitcherLabel">
+        <template #activator="{ props: tooltipProps }">
+            <v-btn
+                v-bind="tooltipProps"
+                :aria-label="themeSwitcherLabel"
+                :icon="themeSwitcherIcon"
+                @click="switchTheme"
+            />
+        </template>
+    </v-tooltip>
 </template>

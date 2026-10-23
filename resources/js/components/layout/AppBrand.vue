@@ -10,15 +10,15 @@ const props = withDefaults(defineProps<{
 </script>
 
 <template>
-    <span class="app-brand">
+    <div class="app-brand">
         <BrandLogo :color="props.color" />
         <BrandTitle :color="props.color" />
-    </span>
+    </div>
 </template>
 
 <style scoped>
 .app-brand {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     gap: 10px;
 }

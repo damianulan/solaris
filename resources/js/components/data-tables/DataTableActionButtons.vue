@@ -35,7 +35,7 @@ const buttons = computed<DataTableActionButton[]>(() => {
             :disabled="button.disabled"
             :icon="button.icon"
             size="small"
-            :title="button.title"
+            :tooltip="button.title"
             :variant="button.variant"
             @click="emit('action', button)"
         />

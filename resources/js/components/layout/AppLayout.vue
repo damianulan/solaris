@@ -36,7 +36,7 @@ watch(isNavigationOpen, (isOpen) => {
         <v-main>
             <v-container class="py-2" fluid>
                 <div v-if="page.props.page.header" class="pb-4 pt-2">
-                    <div class="text-headline-large font-weight-medium text-accent">{{ page.props.page.header }}</div>
+                    <div class="text-headline-large font-weight-medium text-heading">{{ page.props.page.header }}</div>
                     <div v-if="page.props.page.description" class="text-body-medium text-medium-emphasis font-italic">{{ page.props.page.description }}</div>
                 </div>
                 <AppAlerts />

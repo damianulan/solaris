@@ -68,7 +68,7 @@ class UsersDataTable extends DataTableBlueprint
                 ->addButton(fn (array $resource): array => [
                     'color' => 'primary',
                     'href' => $this->resourceUrl($resource, 'editUrl'),
-                    'icon' => 'bi-pencil',
+                    'icon' => 'bi-pencil-fill',
                     'title' => $this->label('frontend.data_table.actions.edit'),
                     'variant' => 'text',
                 ])
@@ -78,7 +78,7 @@ class UsersDataTable extends DataTableBlueprint
                     'disabled' => ($resource['isSuspended'] ?? false) === true
                         || $this->isAuthenticatedUser($resource),
                     'href' => $this->resourceUrl($resource, 'suspendUrl'),
-                    'icon' => 'bi-person-x',
+                    'icon' => 'bi-person-x-fill',
                     'method' => 'post',
                     'title' => ($resource['isSuspended'] ?? false) === true
                         ? $this->label('frontend.data_table.actions.suspended')
@@ -92,7 +92,7 @@ class UsersDataTable extends DataTableBlueprint
                     'confirm' => $this->label('frontend.data_table.actions.delete_confirmation'),
                     'disabled' => $this->isAuthenticatedUser($resource),
                     'href' => $this->resourceUrl($resource, 'deleteUrl'),
-                    'icon' => 'bi-trash',
+                    'icon' => 'bi-trash-fill',
                     'method' => 'delete',
                     'title' => $this->isAuthenticatedUser($resource)
                         ? $this->label('frontend.data_table.actions.self_delete')

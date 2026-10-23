@@ -26,7 +26,7 @@ const aliases = {
     complete: 'bi-check',
     cancel: 'bi-x-circle',
     close: 'bi-x',
-    delete: 'bi-trash',
+    delete: 'bi-trash-fill',
     clear: 'bi-x-circle',
     success: 'bi-check-circle',
     info: 'bi-info-circle',

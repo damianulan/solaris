@@ -17,7 +17,7 @@ const page = usePage();
 <template>
     <v-navigation-drawer
         border="e"
-        color="surface"
+        color="background"
         elevation="0"
         fluid
         :model-value="isOpen"
@@ -26,7 +26,6 @@ const page = usePage();
     >
         <v-list
             class="pa-3"
-            color="accent"
             density="comfortable"
             nav
         >
