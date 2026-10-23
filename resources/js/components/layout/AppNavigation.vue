@@ -16,12 +16,20 @@ const page = usePage();
 
 <template>
     <v-navigation-drawer
-        class="py-2"
+        border="e"
+        color="surface"
+        elevation="0"
         fluid
         :model-value="isOpen"
+        width="276"
         @update:model-value="emit('update:isOpen', $event)"
     >
-        <v-list nav density="comfortable">
+        <v-list
+            class="pa-3"
+            color="accent"
+            density="comfortable"
+            nav
+        >
             <AppNavigationItem
                 v-for="(navigationItem, index) in page.props.sidebar"
                 :key="`${navigationItem.title}-${index}`"

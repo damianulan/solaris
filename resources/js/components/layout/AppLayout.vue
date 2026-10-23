@@ -1,16 +1,25 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { usePage, Head } from '@inertiajs/vue3';
+import type { Banner } from '../../lib/types';
 import AppAlerts from './AppAlerts.vue';
 import AppFooter from './AppFooter.vue';
 import AppHeader from './AppHeader.vue';
 import AppNavigation from './AppNavigation.vue';
 import AppSnackbars from './AppSnackbars.vue';
+import AppTopBanner from './AppTopBanner.vue';
 
 const navigationStorageKey = 'solaris.navigation.isOpen';
 const storedNavigationState = window.localStorage.getItem(navigationStorageKey);
 const isNavigationOpen = ref(storedNavigationState === null || storedNavigationState === 'true');
 const page = usePage();
+const banner = computed<Banner>(() => {
+    if (typeof page.props.banner === 'string') {
+        return { text: page.props.banner };
+    }
+
+    return page.props.banner ?? {};
+});
 
 watch(isNavigationOpen, (isOpen) => {
     window.localStorage.setItem(navigationStorageKey, String(isOpen));
@@ -19,6 +28,7 @@ watch(isNavigationOpen, (isOpen) => {
 
 <template>
     <v-app>
+        <AppTopBanner v-bind="banner" />
         <AppHeader @toggle-navigation="isNavigationOpen = !isNavigationOpen" />
         <AppNavigation v-model:is-open="isNavigationOpen" />
         <Head :title="page.props.page.header ?? undefined" />

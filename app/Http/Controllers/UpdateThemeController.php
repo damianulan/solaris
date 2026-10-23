@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Middleware\ResolveThemeVariant;
 use App\Http\Requests\UpdateThemeRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Nexus\Http\Controllers\BaseController;
+use Nexus\Http\Middleware\Page\ResolveThemeVariant;
 
 final class UpdateThemeController extends BaseController
 {

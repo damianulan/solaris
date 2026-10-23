@@ -86,6 +86,18 @@ class UsersDataTable extends DataTableBlueprint
                             ? $this->label('frontend.data_table.actions.self_suspend')
                             : $this->label('frontend.data_table.actions.suspend')),
                     'variant' => 'text',
+                ])
+                ->addButton(fn (array $resource): array => [
+                    'color' => 'error',
+                    'confirm' => $this->label('frontend.data_table.actions.delete_confirmation'),
+                    'disabled' => $this->isAuthenticatedUser($resource),
+                    'href' => $this->resourceUrl($resource, 'deleteUrl'),
+                    'icon' => 'bi-trash',
+                    'method' => 'delete',
+                    'title' => $this->isAuthenticatedUser($resource)
+                        ? $this->label('frontend.data_table.actions.self_delete')
+                        : $this->label('frontend.data_table.actions.delete'),
+                    'variant' => 'text',
                 ]),
         ];
     }

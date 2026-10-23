@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Link, router, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import { VListItem } from 'vuetify/components';
 
 import { useTranslations } from '../../lib/translations';
 
@@ -51,10 +52,10 @@ function logout(): void {
             <v-divider />
 
             <v-list density="compact" nav>
-                <v-list-item
+                <Link
                     v-if="user"
+                    :as="VListItem"
                     :href="user.profileUrl"
-                    :tag="Link"
                     :title="translate('frontend.user.profile')"
                     prepend-icon="bi-person"
                 />

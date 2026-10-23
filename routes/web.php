@@ -16,6 +16,7 @@ Route::middleware('web')->group(function () {
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->header('Edit user')->description('Update user details');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
         Route::post('/users/{user}/suspension', [SuspendedUserController::class, 'store'])->name('users.suspensions.store');
     });
 

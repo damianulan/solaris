@@ -77,7 +77,10 @@ return [
     'data_table' => [
         'all_items' => 'Wszystkie',
         'actions' => [
+            'delete' => 'Usuń użytkownika',
+            'delete_confirmation' => 'Czy na pewno chcesz usunąć tego użytkownika? Tej operacji nie można cofnąć.',
             'edit' => 'Edytuj użytkownika',
+            'self_delete' => 'Nie możesz usunąć własnego konta',
             'self_suspend' => 'Nie możesz zawiesić własnego konta',
             'suspend' => 'Zawieś użytkownika',
             'suspend_confirmation' => 'Czy na pewno chcesz zawiesić tego użytkownika?',
@@ -153,6 +156,7 @@ return [
         'username' => 'Nazwa użytkownika',
     ],
     'users' => [
+        'deleted' => 'Użytkownik został usunięty.',
         'suspended' => 'Użytkownik został zawieszony.',
         'updated' => 'Użytkownik został zaktualizowany.',
     ],

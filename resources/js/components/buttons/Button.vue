@@ -26,6 +26,7 @@ withDefaults(defineProps<{
         :disabled="disabled"
         :loading="loading"
         :prepend-icon="prependIcon"
+        :rounded="false"
         type="button"
         :variant="variant"
     >

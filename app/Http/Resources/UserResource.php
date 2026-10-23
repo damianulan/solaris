@@ -27,6 +27,7 @@ final class UserResource extends JsonResource
             'fullname' => $user->firstname . ' ' . $user->lastname,
             'email' => $user->email,
             'username' => $user->username,
+            'deleteUrl' => route('users.destroy', $user),
             'editUrl' => route('users.edit', $user),
             'isSuspended' => $user->suspended_at !== null,
             'suspendUrl' => route('users.suspensions.store', $user),

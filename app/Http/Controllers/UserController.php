@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\UserService;
@@ -47,6 +48,16 @@ final class UserController extends BaseController
         $userService->updateProfile($user, $request->profileAttributes());
 
         return back()->with('success', __('frontend.users.updated'));
+    }
+
+    public function destroy(
+        DeleteUserRequest $request,
+        User $user,
+        UserService $userService,
+    ): RedirectResponse {
+        $userService->delete($user);
+
+        return back()->with('success', __('frontend.users.deleted'));
     }
 
     private function avatarUrl(User $user): ?string

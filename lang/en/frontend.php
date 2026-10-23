@@ -77,7 +77,10 @@ return [
     'data_table' => [
         'all_items' => 'All',
         'actions' => [
+            'delete' => 'Delete user',
+            'delete_confirmation' => 'Are you sure you want to delete this user? This action cannot be undone.',
             'edit' => 'Edit user',
+            'self_delete' => 'You cannot delete your own account',
             'self_suspend' => 'You cannot suspend your own account',
             'suspend' => 'Suspend user',
             'suspend_confirmation' => 'Are you sure you want to suspend this user?',
@@ -153,6 +156,7 @@ return [
         'username' => 'Username',
     ],
     'users' => [
+        'deleted' => 'User deleted successfully.',
         'suspended' => 'User suspended successfully.',
         'updated' => 'User updated successfully.',
     ],

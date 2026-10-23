@@ -20,8 +20,21 @@ class HandleInertiaRequests extends InertiaMiddleware
     {
         return [
             ...parent::share($request),
-            'auth.user' => fn (): ?array => $this->authenticatedUser($request)
+            'auth.user' => fn (): ?array => $this->authenticatedUser($request),
+            'banner' => fn (): array | string | null => $this->banner($request),
         ];
+    }
+
+    /** @return array<string, string|null>|string|null */
+    private function banner(Request $request): array | string | null
+    {
+        $banner = $request->session()->get('banner');
+
+        if (! is_array($banner) && ! is_string($banner)) {
+            return null;
+        }
+
+        return $banner;
     }
 
     /** @return array{id: int, name: string, email: string|null, avatarUrl: string|null, profileUrl: string, logoutUrl: string}|null */

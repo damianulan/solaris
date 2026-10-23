@@ -1,22 +1,30 @@
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
+import { VListItem } from 'vuetify/components';
+
 import type { NavigationLink } from '../../lib/types';
 
 defineProps<NavigationLink>();
 </script>
 
 <template>
-    <v-list-item
-        density="comfortable"
+    <Link
+        :as="VListItem"
         :active="active"
-        :prepend-icon="icon ?? undefined"
-        :title="title"
+        :aria-current="active ? 'page' : undefined"
+        color="accent"
+        density="comfortable"
         :disabled="disabled"
+        :href="link"
+        :hover="true"
         :link="true"
         :nav="true"
-        :href="link"
-        active-class="text-accent"
-        class="font-weight-regular"
+        prefetch
+        :prepend-icon="icon ?? undefined"
         prepend-gap="1rem"
-        variant="tonal"
+        rounded="lg"
+        :title="title"
+        variant="text"
+        view-transition
     />
 </template>

@@ -1,23 +1,10 @@
 <script setup lang="ts">
-import { router, usePage } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
-import type { DataTableHeader } from 'vuetify';
-
 import { useTranslations } from '../../lib/translations';
-import type { DataTableActionButton, DataTableBlueprint, DataTableColumn } from '../../lib/types';
-import IconButton from '../buttons/IconButton.vue';
+import type { DataTableBlueprint } from '../../lib/types';
 import ConfirmationDialog from '../dialogs/ConfirmationDialog.vue';
-
-interface DataTableOptions {
-    page: number;
-    itemsPerPage: number;
-    sortBy: DataTableSortItem[];
-}
-
-interface DataTableSortItem {
-    key: string;
-    order: 'asc' | 'desc';
-}
+import DataTableActionButtons from './DataTableActionButtons.vue';
+import { useDataTable } from './useDataTable';
+import { useDataTableActions } from './useDataTableActions';
 
 const props = defineProps<{
     table: DataTableBlueprint;
@@ -28,164 +15,27 @@ defineSlots<{
 }>();
 
 const { translate } = useTranslations();
-const page = usePage();
-const isLoading = ref(false);
-const pendingAction = ref<DataTableActionButton | null>(null);
-const selectedItems = ref<Array<number | string>>([]);
-const isConfirmationDialogOpen = computed({
-    get: () => pendingAction.value !== null,
-    set: (isOpen: boolean) => {
-        if (!isOpen) {
-            pendingAction.value = null;
-        }
-    },
-});
-const selectableColumn = computed(() => props.table.columns.find((column) => column.type === 'selectable'));
-const actionColumns = computed(() => props.table.columns.filter((column) => column.type === 'action'));
-const dataColumns = computed(() => props.table.columns.filter((column) => column.type === 'default'));
-const headers = computed<DataTableHeader[]>(() => props.table.columns.map((column) => column.type === 'selectable'
-    ? {
-        align: resolveAlignment(column.alignment),
-        key: 'data-table-select',
-        sortable: false,
-        title: column.label ?? '',
-    }
-    : {
-        align: resolveAlignment(column.alignment),
-        key: column.name,
-        sortable: column.sortable,
-        title: column.label ?? '',
-        value: column.name,
-    }));
-const itemsPerPageOptions = computed(() => props.table.pagination.map((value) => value === -1
-    ? { title: translate('frontend.data_table.all_items'), value }
-    : value));
-const sortBy = ref<DataTableSortItem[]>(initialSort());
-
-function resolveAlignment(alignment: DataTableColumn['alignment']): DataTableHeader['align'] {
-    if (alignment === 'right') {
-        return 'end';
-    }
-
-    if (alignment === 'center') {
-        return 'center';
-    }
-
-    return 'start';
-}
-
-function initialSort(): DataTableSortItem[] {
-    const parameters = queryParameters();
-    const key = parameters.get('sortBy');
-    const column = props.table.columns.find((candidate) => candidate.name === key);
-
-    if (!column?.sortable) {
-        return [];
-    }
-
-    return [{
-        key: column.name,
-        order: parameters.get('sortDirection')?.toLowerCase() === 'desc' ? 'desc' : 'asc',
-    }];
-}
-
-function queryParameters(): URLSearchParams {
-    return new URLSearchParams(page.url.split('?')[1] ?? '');
-}
-
-function actionButtons(value: unknown): DataTableActionButton[] {
-    if (!Array.isArray(value)) {
-        return [];
-    }
-
-    return value.filter((button): button is DataTableActionButton => (
-        typeof button === 'object'
-        && button !== null
-        && typeof Reflect.get(button, 'href') === 'string'
-    ));
-}
-
-function performAction(button: DataTableActionButton): void {
-    if (button.disabled) {
-        return;
-    }
-
-    if (button.confirm) {
-        pendingAction.value = button;
-
-        return;
-    }
-
-    visitAction(button);
-}
-
-function confirmAction(): void {
-    const action = pendingAction.value;
-
-    pendingAction.value = null;
-
-    if (!action) {
-        return;
-    }
-
-    visitAction(action);
-}
-
-function visitAction(button: DataTableActionButton): void {
-    router.visit(button.href, {
-        method: button.method ?? 'get',
-        preserveScroll: button.method !== undefined && button.method !== 'get',
-    });
-}
-
-function loadTable(options: DataTableOptions): void {
-    const paginator = props.table.paginator;
-    const parameters = queryParameters();
-    const activeSort = options.sortBy[0];
-    const currentSortBy = parameters.get('sortBy');
-    const currentSortDirection = parameters.get('sortDirection')?.toLowerCase() ?? null;
-
-    if (
-        options.page === paginator.current_page
-        && options.itemsPerPage === paginator.per_page
-        && (activeSort?.key ?? null) === currentSortBy
-        && (activeSort?.order ?? null) === currentSortDirection
-    ) {
-        return;
-    }
-
-    const url = new URL(window.location.href);
-    const sortingChanged = (activeSort?.key ?? null) !== currentSortBy
-        || (activeSort?.order ?? null) !== currentSortDirection;
-
-    url.searchParams.set('page', String(sortingChanged ? 1 : options.page));
-    url.searchParams.set('perPage', String(options.itemsPerPage));
-
-    if (activeSort) {
-        url.searchParams.set('sortBy', activeSort.key);
-        url.searchParams.set('sortDirection', activeSort.order);
-    } else {
-        url.searchParams.delete('sortBy');
-        url.searchParams.delete('sortDirection');
-    }
-
-    router.visit(url, {
-        only: ['table'],
-        preserveScroll: true,
-        preserveState: true,
-        replace: true,
-        onStart: () => {
-            isLoading.value = true;
-        },
-        onFinish: () => {
-            isLoading.value = false;
-        },
-    });
-}
+const {
+    actionColumns,
+    dataColumns,
+    headers,
+    isLoading,
+    itemsPerPageOptions,
+    loadTable,
+    selectableColumn,
+    selectedItems,
+    sortBy,
+} = useDataTable(() => props.table, translate);
+const {
+    confirmAction,
+    isConfirmationDialogOpen,
+    pendingAction,
+    performAction,
+} = useDataTableActions();
 </script>
 
 <template>
-    <v-card border flat>
+    <v-card class="data-table-card" border flat>
         <div v-if="$slots.actions" class="data-table-actions d-flex flex-wrap justify-end ga-2 pa-4">
             <slot name="actions" :selected-items="selectedItems" />
         </div>
@@ -233,20 +83,7 @@ function loadTable(options: DataTableOptions): void {
                 :key="column.name"
                 #[`item.${column.name}`]="{ value }"
             >
-                <div class="d-flex justify-end ga-1">
-                    <IconButton
-                        v-for="(button, index) in actionButtons(value)"
-                        :key="`${column.name}-${index}`"
-                        :aria-label="button.title"
-                        :color="button.color"
-                        :disabled="button.disabled"
-                        :icon="button.icon"
-                        size="small"
-                        :title="button.title"
-                        :variant="button.variant"
-                        @click="performAction(button)"
-                    />
-                </div>
+                <DataTableActionButtons :value="value" @action="performAction" />
             </template>
         </v-data-table-server>
 
@@ -254,7 +91,9 @@ function loadTable(options: DataTableOptions): void {
             v-model="isConfirmationDialogOpen"
             :cancel-label="translate('frontend.data_table.confirmation.cancel')"
             :color="pendingAction?.color"
+            :confirm-icon="pendingAction?.icon"
             :confirm-label="pendingAction?.title ?? translate('frontend.data_table.confirmation.confirm')"
+            :icon="pendingAction?.icon"
             :message="pendingAction?.confirm ?? ''"
             :title="translate('frontend.data_table.confirmation.title')"
             @confirm="confirmAction"
@@ -263,6 +102,11 @@ function loadTable(options: DataTableOptions): void {
 </template>
 
 <style scoped>
+.data-table-card {
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
 .data-table :deep(.v-table__wrapper > table > thead > tr > th) {
     background: color-mix(in srgb, rgb(var(--v-theme-surface)) 90%, black);
     border: 0;

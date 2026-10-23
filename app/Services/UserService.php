@@ -14,6 +14,11 @@ use Throwable;
 
 final class UserService
 {
+    public function delete(User $user): void
+    {
+        $user->delete();
+    }
+
     public function suspend(User $user): User
     {
         $user->update(['suspended_at' => now()]);

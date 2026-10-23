@@ -65,6 +65,12 @@ export interface Alert extends Snackbar {
     header: string | null;
 }
 
+export interface Banner {
+    backgroundColor?: string;
+    prependIcon?: string;
+    text?: string | null;
+}
+
 export interface DataTableColumn {
     name: string;
     label: string | null;

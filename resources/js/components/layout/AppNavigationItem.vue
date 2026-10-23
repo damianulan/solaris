@@ -17,27 +17,29 @@ const isActive = computed(() => navigationGroup.value !== null && navigationGrou
 </script>
 
 <template>
-    <v-menu v-if="navigationGroup" open-on-hover submenu>
+    <v-list-group
+        v-if="navigationGroup"
+        :value="`${navigationGroup.title}-${navigationGroup.priority}`"
+    >
         <template #activator="{ props: activatorProps }">
             <v-list-item
                 v-bind="activatorProps"
                 :active="isActive"
-                :prepend-icon="navigationGroup.icon ?? undefined"
-                :title="navigationGroup.title"
-                :disabled="navigationGroup.disabled"
                 color="accent"
-                append-icon="bi-chevron-right"
+                density="comfortable"
+                :disabled="navigationGroup.disabled"
+                :prepend-icon="navigationGroup.icon ?? undefined"
+                rounded="lg"
+                :title="navigationGroup.title"
             />
         </template>
 
-        <v-list density="comfortable" min-width="220" nav>
-            <AppNavigationItem
-                v-for="(childItem, index) in navigationGroup.items"
-                :key="`${childItem.title}-${index}`"
-                :item="childItem"
-            />
-        </v-list>
-    </v-menu>
+        <AppNavigationItem
+            v-for="(childItem, index) in navigationGroup.items"
+            :key="`${childItem.title}-${index}`"
+            :item="childItem"
+        />
+    </v-list-group>
 
     <AppNavigationLink v-else-if="navigationLink" v-bind="navigationLink" />
 </template>

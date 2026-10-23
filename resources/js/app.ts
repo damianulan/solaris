@@ -9,12 +9,14 @@ import 'vuetify/styles';
 import { createInertiaApp } from '@inertiajs/vue3';
 import { createApp, h, type DefineComponent } from 'vue';
 
+import AppLoadingOverlay from './components/layout/AppLoadingOverlay.vue';
 import { translateMessage } from './lib/translations';
 import createVuetifyPlugin from './plugins/vuetify';
 
 const pages = import.meta.glob<{ default: DefineComponent }>('./Pages/**/*.vue');
 
 createInertiaApp({
+    progress: false,
     title: (title, page) => {
         const appName = translateMessage(page.props.localization.messages, 'frontend.app.name');
 
@@ -30,7 +32,7 @@ createInertiaApp({
         return page().then((module) => module.default);
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
+        createApp({ render: () => [h(App, props), h(AppLoadingOverlay)] })
             .use(plugin)
             .use(createVuetifyPlugin(props.initialPage.props.theme))
             .mount(el);
