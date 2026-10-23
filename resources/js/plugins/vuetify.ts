@@ -76,27 +76,35 @@ const aliases = {
     backspace: 'bi-backspace',
 };
 
-export const createVuetifyPlugin = (theme: Theme) => createVuetify({
-    theme: {
-        defaultTheme: theme.variant,
-        themes: {
-            light: {
-                dark: false,
-                colors: theme.light,
+const createVuetifyPlugin = (theme: Theme) =>
+    createVuetify({
+        theme: {
+            defaultTheme: theme.variant,
+            themes: {
+                light: {
+                    dark: false,
+                    colors: theme.light,
+                },
+                dark: {
+                    dark: true,
+                    colors: theme.dark,
+                },
             },
-            dark: {
-                dark: true,
-                colors: theme.dark,
-            },
-        },
-    },
-    icons: {
-        defaultSet: 'bootstrap',
-        aliases,
-        sets: {
-            bootstrap: {
-                component: BootstrapIcon,
+            variations: {
+                colors: ["primary", "secondary", "accent", "surface"],
+                lighten: 5,
+                darken: 5,
             },
         },
-    },
-});
+        icons: {
+            defaultSet: "bootstrap",
+            aliases,
+            sets: {
+                bootstrap: {
+                    component: BootstrapIcon,
+                },
+            },
+        },
+    });
+
+export default createVuetifyPlugin;

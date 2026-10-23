@@ -39,3 +39,34 @@ it('sorts sortable columns in the requested direction', function (string $direct
     'ascending' => ['asc', ['Ada Lovelace', 'Alan Turing', 'Grace Hopper']],
     'descending' => ['desc', ['Grace Hopper', 'Alan Turing', 'Ada Lovelace']],
 ]);
+
+it('serializes edit and suspend actions for each user', function () {
+    $actor = User::factory()->create();
+    $user = User::factory()->create();
+    $request = Request::create('/');
+    $request->setUserResolver(fn (): User => $actor);
+
+    $table = new UsersDataTable($request)->toArray();
+    $row = collect($table['paginator']['data'])->firstWhere('id', $user->id);
+
+    expect($row)->toBeArray();
+    expect($row['actions'])->toBe([
+        [
+            'color' => 'primary',
+            'href' => route('users.edit', $user),
+            'icon' => 'bi-pencil',
+            'title' => __('frontend.data_table.actions.edit'),
+            'variant' => 'text',
+        ],
+        [
+            'color' => 'warning',
+            'confirm' => __('frontend.data_table.actions.suspend_confirmation'),
+            'disabled' => false,
+            'href' => route('users.suspensions.store', $user),
+            'icon' => 'bi-person-x',
+            'method' => 'post',
+            'title' => __('frontend.data_table.actions.suspend'),
+            'variant' => 'text',
+        ],
+    ]);
+});

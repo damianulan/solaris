@@ -8,7 +8,7 @@ withDefaults(defineProps<{
     disabled?: boolean;
     icon?: string;
     loading?: boolean;
-    size: string;
+    size?: string;
     type?: ButtonType;
     variant?: ButtonVariant;
 }>(), {
@@ -30,11 +30,13 @@ withDefaults(defineProps<{
         :disabled="disabled"
         :icon="icon"
         :loading="loading"
+        :size="size"
         :type="type"
         :variant="variant"
     >
-
-        <slot />
+        <template v-if="$slots.default" #default>
+            <slot />
+        </template>
 
         <template v-if="$slots.loader" #loader>
             <slot name="loader" />

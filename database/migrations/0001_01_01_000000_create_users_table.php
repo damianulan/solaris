@@ -1,11 +1,11 @@
 <?php
 
 use App\Models\User;
-use App\ThemeVariant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use Nexus\Enums\Auth\AuthType;
+use Nexus\Enums\Page\ThemeVariant;
 
 return new class () extends Migration {
     /**

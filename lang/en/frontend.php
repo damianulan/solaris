@@ -76,9 +76,22 @@ return [
     ],
     'data_table' => [
         'all_items' => 'All',
+        'actions' => [
+            'edit' => 'Edit user',
+            'self_suspend' => 'You cannot suspend your own account',
+            'suspend' => 'Suspend user',
+            'suspend_confirmation' => 'Are you sure you want to suspend this user?',
+            'suspended' => 'User is suspended',
+        ],
         'columns' => [
+            'actions' => 'Actions',
             'email' => 'Email',
             'fullname' => 'Full name',
+        ],
+        'confirmation' => [
+            'cancel' => 'Cancel',
+            'confirm' => 'Confirm',
+            'title' => 'Confirm action',
         ],
         'empty_value' => '-',
         'first_page' => 'First page',
@@ -89,6 +102,8 @@ return [
         'no_data' => 'No data available',
         'page_text' => '{0}-{1} of {2}',
         'previous_page' => 'Previous page',
+        'select_all' => 'Select all visible rows',
+        'select_row' => 'Select row',
     ],
     'footer' => [
         'copyright' => '© :year :name',
@@ -136,6 +151,10 @@ return [
         'success' => 'Your profile has been updated.',
         'timezone' => 'Timezone',
         'username' => 'Username',
+    ],
+    'users' => [
+        'suspended' => 'User suspended successfully.',
+        'updated' => 'User updated successfully.',
     ],
     'theme' => [
         'switch_to_dark' => 'Switch to dark theme',

@@ -76,9 +76,22 @@ return [
     ],
     'data_table' => [
         'all_items' => 'Wszystkie',
+        'actions' => [
+            'edit' => 'Edytuj użytkownika',
+            'self_suspend' => 'Nie możesz zawiesić własnego konta',
+            'suspend' => 'Zawieś użytkownika',
+            'suspend_confirmation' => 'Czy na pewno chcesz zawiesić tego użytkownika?',
+            'suspended' => 'Użytkownik jest zawieszony',
+        ],
         'columns' => [
+            'actions' => 'Akcje',
             'email' => 'Email',
             'fullname' => 'Imię i nazwisko',
+        ],
+        'confirmation' => [
+            'cancel' => 'Anuluj',
+            'confirm' => 'Potwierdź',
+            'title' => 'Potwierdź działanie',
         ],
         'empty_value' => '-',
         'first_page' => 'Pierwsza strona',
@@ -89,6 +102,8 @@ return [
         'no_data' => 'Brak danych',
         'page_text' => '{0}-{1} z {2}',
         'previous_page' => 'Poprzednia strona',
+        'select_all' => 'Zaznacz wszystkie widoczne wiersze',
+        'select_row' => 'Zaznacz wiersz',
     ],
     'footer' => [
         'copyright' => '© :year :name',
@@ -136,6 +151,10 @@ return [
         'success' => 'Profil został zaktualizowany.',
         'timezone' => 'Strefa czasowa',
         'username' => 'Nazwa użytkownika',
+    ],
+    'users' => [
+        'suspended' => 'Użytkownik został zawieszony.',
+        'updated' => 'Użytkownik został zaktualizowany.',
     ],
     'theme' => [
         'switch_to_dark' => 'Przełącz na ciemny motyw',

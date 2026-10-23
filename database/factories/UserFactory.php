@@ -3,11 +3,11 @@
 namespace Database\Factories;
 
 use App\Models\User;
-use App\ThemeVariant;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Nexus\Enums\Auth\AuthType;
+use Nexus\Enums\Page\ThemeVariant;
 
 /**
  * @extends Factory<User>

@@ -23,9 +23,13 @@ final class UserResource extends JsonResource
         $user = $this->resource;
 
         return [
+            'id' => $user->id,
             'fullname' => $user->firstname . ' ' . $user->lastname,
             'email' => $user->email,
             'username' => $user->username,
+            'editUrl' => route('users.edit', $user),
+            'isSuspended' => $user->suspended_at !== null,
+            'suspendUrl' => route('users.suspensions.store', $user),
         ];
     }
 }

@@ -10,7 +10,7 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { createApp, h, type DefineComponent } from 'vue';
 
 import { translateMessage } from './lib/translations';
-import { createVuetifyPlugin } from './plugins/vuetify';
+import createVuetifyPlugin from './plugins/vuetify';
 
 const pages = import.meta.glob<{ default: DefineComponent }>('./Pages/**/*.vue');
 

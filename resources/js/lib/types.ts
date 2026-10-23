@@ -67,9 +67,21 @@ export interface Alert extends Snackbar {
 
 export interface DataTableColumn {
     name: string;
-    label: string;
+    label: string | null;
     sortable: boolean;
     alignment: 'left' | 'center' | 'right';
+    type: 'action' | 'default' | 'selectable';
+}
+
+export interface DataTableActionButton {
+    color?: string;
+    confirm?: string;
+    disabled?: boolean;
+    href: string;
+    icon?: string;
+    method?: 'delete' | 'get' | 'patch' | 'post' | 'put';
+    title?: string;
+    variant?: 'elevated' | 'flat' | 'outlined' | 'plain' | 'text' | 'tonal';
 }
 
 export interface DataTablePaginator {

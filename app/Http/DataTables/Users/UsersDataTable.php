@@ -8,8 +8,10 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Nexus\Monolith\DataTable\Blueprints\ActionColumn;
 use Nexus\Monolith\DataTable\Blueprints\DataTableBlueprint;
 use Nexus\Monolith\DataTable\Blueprints\DataColumn;
+use Nexus\Monolith\DataTable\Blueprints\SelectableColumn;
 use UnexpectedValueException;
 
 class UsersDataTable extends DataTableBlueprint
@@ -58,9 +60,33 @@ class UsersDataTable extends DataTableBlueprint
     protected function columns(): array
     {
         return [
-            new DataColumn('selectable')->selectable(),
+            new SelectableColumn,
             new DataColumn('fullname')->label($this->label('frontend.data_table.columns.fullname')),
             new DataColumn('email')->label($this->label('frontend.data_table.columns.email')),
+            (new ActionColumn)
+                ->label($this->label('frontend.data_table.columns.actions'))
+                ->addButton(fn (array $resource): array => [
+                    'color' => 'primary',
+                    'href' => $this->resourceUrl($resource, 'editUrl'),
+                    'icon' => 'bi-pencil',
+                    'title' => $this->label('frontend.data_table.actions.edit'),
+                    'variant' => 'text',
+                ])
+                ->addButton(fn (array $resource): array => [
+                    'color' => 'warning',
+                    'confirm' => $this->label('frontend.data_table.actions.suspend_confirmation'),
+                    'disabled' => ($resource['isSuspended'] ?? false) === true
+                        || $this->isAuthenticatedUser($resource),
+                    'href' => $this->resourceUrl($resource, 'suspendUrl'),
+                    'icon' => 'bi-person-x',
+                    'method' => 'post',
+                    'title' => ($resource['isSuspended'] ?? false) === true
+                        ? $this->label('frontend.data_table.actions.suspended')
+                        : ($this->isAuthenticatedUser($resource)
+                            ? $this->label('frontend.data_table.actions.self_suspend')
+                            : $this->label('frontend.data_table.actions.suspend')),
+                    'variant' => 'text',
+                ]),
         ];
     }
 
@@ -94,6 +120,28 @@ class UsersDataTable extends DataTableBlueprint
         return null;
     }
 
+    /** @param array<string, mixed> $resource */
+    private function resourceUrl(array $resource, string $key): string
+    {
+        $url = $resource[$key] ?? null;
+
+        if (! is_string($url)) {
+            throw new UnexpectedValueException("The resource [{$key}] must be a string.");
+        }
+
+        return $url;
+    }
+
+    /** @param array<string, mixed> $resource */
+    private function isAuthenticatedUser(array $resource): bool
+    {
+        $authenticatedUser = $this->request->user();
+
+        return $authenticatedUser instanceof User
+            && ($resource['id'] ?? null) === $authenticatedUser->getKey();
+    }
+
+    /** @return 'asc'|'desc' */
     private function requestedSortDirection(): string
     {
         return $this->request->string('sortDirection')->lower()->toString() === 'desc'

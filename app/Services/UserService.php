@@ -14,16 +14,28 @@ use Throwable;
 
 final class UserService
 {
+    public function suspend(User $user): User
+    {
+        $user->update(['suspended_at' => now()]);
+
+        return $user->refresh();
+    }
+
     /**
      * @param  array<string, mixed>  $attributes
      */
     public function updateProfile(User $user, array $attributes): User
     {
         $avatarUpload = Arr::pull($attributes, 'avatar');
+        $locale = Arr::pull($attributes, 'lang');
         $previousAvatar = $user->avatar;
         $storedAvatar = null;
 
         try {
+            if (is_string($locale)) {
+                $attributes['locale'] = $locale;
+            }
+
             if (is_string($avatarUpload)) {
                 $storedAvatar = $this->storeAvatar($user, $avatarUpload);
                 $attributes['avatar'] = $storedAvatar;

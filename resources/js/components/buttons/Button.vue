@@ -14,7 +14,7 @@ withDefaults(defineProps<{
     disabled: false,
     loading: false,
     prependIcon: undefined,
-    variant: 'flat',
+    variant: 'outlined',
 });
 </script>
 
