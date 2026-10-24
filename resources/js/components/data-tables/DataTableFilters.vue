@@ -152,7 +152,7 @@ function reset(): void {
                     {{ translate('frontend.data_table.filters.reset') }}
                 </ResetButton>
 
-                <SubmitButton :loading="loading" prepend-icon="bi-funnel-fill">
+                <SubmitButton :loading="loading" color="accent" prepend-icon="bi-funnel-fill">
                     {{ translate('frontend.data_table.filters.submit') }}
                 </SubmitButton>
             </v-col>

@@ -2,7 +2,73 @@ import { createVuetify } from 'vuetify';
 import type { JSXComponent } from 'vuetify/lib/util/defineComponent.js';
 import { defineComponent, h, type PropType } from 'vue';
 
-import type { Theme } from '../lib/types';
+import type { Theme, ThemeColor, ThemeColors, ThemeVariant } from '../lib/types';
+
+const gradientStylesheetId = 'vuetify-theme-gradient-stylesheet';
+
+const isGradient = (color: ThemeColor): color is string[] => Array.isArray(color) && color.length > 1;
+
+const normalizeThemeColors = (colors: ThemeColors): Record<string, string> => Object.fromEntries(
+    Object.entries(colors).map(([name, color]) => {
+        if (Array.isArray(color)) {
+            const [firstColor] = color;
+
+            if (!firstColor) {
+                throw new Error(`Theme color "${name}" must contain at least one color.`);
+            }
+
+            return [name, firstColor];
+        }
+
+        return [name, color];
+    }),
+);
+
+const escapeCssIdentifier = (identifier: string): string => identifier.replace(
+    /[^a-zA-Z0-9_-]/g,
+    (character) => `\\${character.codePointAt(0)?.toString(16)} `,
+);
+
+const createGradientStyles = (variant: ThemeVariant, colors: ThemeColors): string => Object.entries(colors)
+    .flatMap(([name, color]) => {
+        if (!isGradient(color)) {
+            return [];
+        }
+
+        const themeClass = `.v-theme--${escapeCssIdentifier(variant)}`;
+        const backgroundClass = `.bg-${escapeCssIdentifier(name)}`;
+        const textClass = `.text-${escapeCssIdentifier(name)}`;
+        const gradient = `linear-gradient(135deg, ${color.join(', ')})`;
+        const rules = [
+            `${themeClass}${backgroundClass}, ${themeClass} ${backgroundClass} { background-image: ${gradient}; }`,
+            `${themeClass}${textClass}, ${themeClass} ${textClass} { background-image: ${gradient}; background-clip: text; -webkit-background-clip: text; color: transparent !important; }`,
+        ];
+
+        if (name === 'background') {
+            rules.push(`${themeClass} { background-image: ${gradient}; }`);
+        }
+
+        return rules;
+    })
+    .join('\n');
+
+const installGradientStyles = (theme: Theme): void => {
+    if (typeof document === 'undefined') {
+        return;
+    }
+
+    const stylesheet = document.getElementById(gradientStylesheetId) ?? document.createElement('style');
+
+    stylesheet.id = gradientStylesheetId;
+    stylesheet.textContent = [
+        createGradientStyles('light', theme.light),
+        createGradientStyles('dark', theme.dark),
+    ].filter(Boolean).join('\n');
+
+    if (!stylesheet.parentNode) {
+        document.head.append(stylesheet);
+    }
+};
 
 const BootstrapIcon = defineComponent({
     name: 'BootstrapIcon',
@@ -76,29 +142,31 @@ const aliases = {
     backspace: 'bi-backspace',
 };
 
-const createVuetifyPlugin = (theme: Theme) =>
-    createVuetify({
+const createVuetifyPlugin = (theme: Theme) => {
+    installGradientStyles(theme);
+
+    return createVuetify({
         ssr: true,
         theme: {
             defaultTheme: theme.variant,
             themes: {
                 light: {
                     dark: false,
-                    colors: theme.light,
+                    colors: normalizeThemeColors(theme.light),
                 },
                 dark: {
                     dark: true,
-                    colors: theme.dark,
+                    colors: normalizeThemeColors(theme.dark),
                 },
             },
             variations: {
-                colors: ["primary", "secondary", "accent", "surface"],
+                colors: ['primary', 'secondary', 'accent', 'surface'],
                 lighten: 5,
                 darken: 5,
             },
         },
         icons: {
-            defaultSet: "bootstrap",
+            defaultSet: 'bootstrap',
             aliases,
             sets: {
                 bootstrap: {
@@ -107,5 +175,6 @@ const createVuetifyPlugin = (theme: Theme) =>
             },
         },
     });
+};
 
 export default createVuetifyPlugin;

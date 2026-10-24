@@ -1,5 +1,7 @@
+export type ThemeColor = string | string[];
+
 export interface ThemeColors {
-    [name: string]: string;
+    [name: string]: ThemeColor;
 }
 
 export type ThemeVariant = 'light' | 'dark';
