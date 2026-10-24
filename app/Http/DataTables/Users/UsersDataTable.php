@@ -13,7 +13,6 @@ use Nexus\Monolith\DataTable\Blueprints\ActionColumn;
 use Nexus\Monolith\DataTable\Blueprints\DataTableBlueprint;
 use Nexus\Monolith\DataTable\Blueprints\DataColumn;
 use Nexus\Monolith\DataTable\Blueprints\SelectableColumn;
-use Nexus\Monolith\Filtering\Facades\Filters;
 use Nexus\Monolith\Filtering\Blueprints\FilterBag;
 use UnexpectedValueException;
 
@@ -73,7 +72,6 @@ class UsersDataTable extends DataTableBlueprint
                     'href' => $this->resourceUrl($resource, 'editUrl'),
                     'icon' => 'bi-pencil-fill',
                     'title' => $this->label('frontend.data_table.actions.edit'),
-                    'variant' => 'text',
                 ])
                 ->addButton(fn (array $resource): array => [
                     'color' => 'warning',
@@ -88,7 +86,6 @@ class UsersDataTable extends DataTableBlueprint
                         : ($this->isAuthenticatedUser($resource)
                             ? $this->label('frontend.data_table.actions.self_suspend')
                             : $this->label('frontend.data_table.actions.suspend')),
-                    'variant' => 'text',
                 ])
                 ->addButton(fn (array $resource): array => [
                     'color' => 'error',
@@ -100,14 +97,13 @@ class UsersDataTable extends DataTableBlueprint
                     'title' => $this->isAuthenticatedUser($resource)
                         ? $this->label('frontend.data_table.actions.self_delete')
                         : $this->label('frontend.data_table.actions.delete'),
-                    'variant' => 'text',
                 ]),
         ];
     }
 
     protected function getFilters(): FilterBag
     {
-        return Filters::add(FullnameFilter::class, 12);
+        return (new FilterBag($this->request))->add(FullnameFilter::class);
     }
 
     private function requestedSortColumn(): ?string

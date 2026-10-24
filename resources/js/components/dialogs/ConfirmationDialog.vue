@@ -22,10 +22,10 @@ withDefaults(defineProps<{
 }>(), {
     cancelColor: 'error',
     cancelIcon: 'bi-x-lg',
-    cancelVariant: 'outlined',
+    cancelVariant: 'tonal',
     color: 'success',
     confirmIcon: 'bi-check-lg',
-    confirmVariant: 'outlined',
+    confirmVariant: 'tonal',
     icon: 'bi-question-circle',
     maxWidth: 480,
     persistent: true,

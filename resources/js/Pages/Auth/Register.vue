@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 import AuthShell from '../../components/auth/AuthShell.vue';
 import SubmitButton from '../../components/buttons/SubmitButton.vue';
+import TextInput from '../../components/forms/TextInput.vue';
 import { useTranslations } from '../../lib/translations';
 
 type RegistrationField =
@@ -80,44 +81,40 @@ function submit(): void {
 
         <form novalidate @submit.prevent="submit">
             <div class="name-fields">
-                <v-text-field
+                <TextInput
                     v-model="form.firstname"
                     autocomplete="given-name"
                     :error-messages="errorMessages('firstname')"
                     :label="translate('frontend.auth.register.first_name')"
                     name="firstname"
-                    variant="outlined"
                 />
-                <v-text-field
+                <TextInput
                     v-model="form.lastname"
                     autocomplete="family-name"
                     :error-messages="errorMessages('lastname')"
                     :label="translate('frontend.auth.register.last_name')"
                     name="lastname"
-                    variant="outlined"
                 />
             </div>
 
-            <v-text-field
+            <TextInput
                 v-model="form.middlename"
                 autocomplete="additional-name"
                 :error-messages="errorMessages('middlename')"
                 :label="translate('frontend.auth.register.middle_name')"
                 name="middlename"
-                variant="outlined"
             />
 
-            <v-text-field
+            <TextInput
                 v-model="form.username"
                 autocomplete="username"
                 :error-messages="errorMessages('username')"
                 :label="translate('frontend.auth.register.username')"
                 name="username"
                 prepend-inner-icon="bi-person"
-                variant="outlined"
             />
 
-            <v-text-field
+            <TextInput
                 v-model="form.email"
                 autocomplete="email"
                 :error-messages="errorMessages('email')"
@@ -125,10 +122,9 @@ function submit(): void {
                 name="email"
                 prepend-inner-icon="bi-envelope"
                 type="email"
-                variant="outlined"
             />
 
-            <v-text-field
+            <TextInput
                 v-model="form.password"
                 autocomplete="new-password"
                 :append-inner-icon="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"
@@ -138,11 +134,10 @@ function submit(): void {
                 name="password"
                 prepend-inner-icon="bi-lock"
                 :type="isPasswordVisible ? 'text' : 'password'"
-                variant="outlined"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
             />
 
-            <v-text-field
+            <TextInput
                 v-model="form.password_confirmation"
                 autocomplete="new-password"
                 :error-messages="errorMessages('password_confirmation')"
@@ -150,7 +145,6 @@ function submit(): void {
                 name="password_confirmation"
                 prepend-inner-icon="bi-lock-fill"
                 :type="isPasswordVisible ? 'text' : 'password'"
-                variant="outlined"
             />
 
             <SubmitButton

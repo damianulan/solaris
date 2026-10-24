@@ -2,7 +2,11 @@ import { router, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import type { DataTableHeader } from 'vuetify';
 
-import type { DataTableBlueprint, DataTableColumn } from '../../lib/types';
+import type {
+    DataTableBlueprint,
+    DataTableColumn,
+    DataTableFilterValue,
+} from '../../lib/types';
 
 interface DataTableOptions {
     page: number;
@@ -83,17 +87,24 @@ export function useDataTable(table: () => DataTableBlueprint, translate: Transla
         const sortingChanged = (activeSort?.key ?? null) !== currentSortBy
             || (activeSort?.order ?? null) !== currentSortDirection;
 
-        url.searchParams.set('page', String(sortingChanged ? 1 : options.page));
-        url.searchParams.set('perPage', String(options.itemsPerPage));
+        setTableParameters(url, sortingChanged ? 1 : options.page, options.itemsPerPage, activeSort);
+        visitTable(url);
+    }
 
-        if (activeSort) {
-            url.searchParams.set('sortBy', activeSort.key);
-            url.searchParams.set('sortDirection', activeSort.order);
-        } else {
-            url.searchParams.delete('sortBy');
-            url.searchParams.delete('sortDirection');
-        }
+    function filterTable(filters: Record<string, DataTableFilterValue>): void {
+        const url = new URL(window.location.href);
 
+        setTableParameters(
+            url,
+            1,
+            resolvedTable.value.paginator.per_page,
+            sortBy.value[0],
+        );
+        setFilterParameters(url, filters);
+        visitTable(url);
+    }
+
+    function visitTable(url: URL): void {
         router.visit(url, {
             only: ['table'],
             preserveScroll: true,
@@ -111,6 +122,7 @@ export function useDataTable(table: () => DataTableBlueprint, translate: Transla
     return {
         actionColumns,
         dataColumns,
+        filterTable,
         headers,
         isLoading,
         itemsPerPageOptions,
@@ -119,6 +131,44 @@ export function useDataTable(table: () => DataTableBlueprint, translate: Transla
         selectedItems,
         sortBy,
     };
+}
+
+function setTableParameters(
+    url: URL,
+    page: number,
+    itemsPerPage: number,
+    sort: DataTableSortItem | undefined,
+): void {
+    url.searchParams.set('page', String(page));
+    url.searchParams.set('perPage', String(itemsPerPage));
+
+    if (sort) {
+        url.searchParams.set('sortBy', sort.key);
+        url.searchParams.set('sortDirection', sort.order);
+
+        return;
+    }
+
+    url.searchParams.delete('sortBy');
+    url.searchParams.delete('sortDirection');
+}
+
+function setFilterParameters(url: URL, filters: Record<string, DataTableFilterValue>): void {
+    [...url.searchParams.keys()]
+        .filter((key) => key.startsWith('filters['))
+        .forEach((key) => url.searchParams.delete(key));
+
+    Object.entries(filters).forEach(([slug, value]) => {
+        if (Array.isArray(value)) {
+            value.forEach((item) => url.searchParams.append(`filters[${slug}][]`, item));
+
+            return;
+        }
+
+        if (value !== null && value !== '') {
+            url.searchParams.set(`filters[${slug}]`, value);
+        }
+    });
 }
 
 function resolveAlignment(alignment: DataTableColumn['alignment']): DataTableHeader['align'] {

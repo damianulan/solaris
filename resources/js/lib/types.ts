@@ -87,7 +87,6 @@ export interface DataTableActionButton {
     icon?: string;
     method?: 'delete' | 'get' | 'patch' | 'post' | 'put';
     title?: string;
-    variant?: 'elevated' | 'flat' | 'outlined' | 'plain' | 'text' | 'tonal';
 }
 
 export interface DataTablePaginator {
@@ -97,8 +96,45 @@ export interface DataTablePaginator {
     total: number;
 }
 
+export type DataTableFilterValue = string | string[] | null;
+
+export interface DataTableFilterOption {
+    label: string;
+    value: boolean | number | string;
+}
+
+interface DataTableFilterBase {
+    label: string;
+    slug: string;
+}
+
+export interface DataTableTextFilter extends DataTableFilterBase {
+    type: 'text';
+    value: string | null;
+}
+
+export interface DataTableSelectFilter extends DataTableFilterBase {
+    options: DataTableFilterOption[];
+    type: 'select';
+    value: string | null;
+}
+
+export interface DataTableMultiselectFilter extends DataTableFilterBase {
+    options: DataTableFilterOption[];
+    type: 'multiselect';
+    value: string[] | null;
+}
+
+export type DataTableFilter = DataTableTextFilter | DataTableSelectFilter | DataTableMultiselectFilter;
+
+export interface DataTableFilterDefinition {
+    col: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+    filter: DataTableFilter;
+}
+
 export interface DataTableBlueprint {
     columns: DataTableColumn[];
+    filters: DataTableFilterDefinition[];
     paginator: DataTablePaginator;
     pagination: number[];
 }

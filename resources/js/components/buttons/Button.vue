@@ -14,7 +14,7 @@ withDefaults(defineProps<{
     disabled: false,
     loading: false,
     prependIcon: undefined,
-    variant: 'outlined',
+    variant: 'tonal',
 });
 </script>
 
@@ -48,6 +48,7 @@ withDefaults(defineProps<{
 
 <style scoped>
 .app-button {
+    border: 2px solid currentColor;
     font-weight: 600;
     letter-spacing: normal;
     text-transform: none;

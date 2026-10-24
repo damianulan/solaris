@@ -28,7 +28,7 @@ withDefaults(defineProps<{
     tooltip: undefined,
     prependIcon: undefined,
     type: 'button',
-    variant: 'flat',
+    variant: 'text',
 });
 </script>
 
@@ -42,6 +42,7 @@ withDefaults(defineProps<{
             <span v-bind="tooltipProps" class="d-inline-flex">
                 <v-icon-btn
                     v-bind="$attrs"
+                    class="app-icon-button"
                     :aria-label="ariaLabel"
                     :color="color"
                     :disabled="disabled"

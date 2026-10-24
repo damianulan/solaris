@@ -98,6 +98,11 @@ return [
         ],
         'empty_value' => '-',
         'first_page' => 'Pierwsza strona',
+        'filters' => [
+            'reset' => 'Wyczyść filtry',
+            'submit' => 'Filtruj',
+            'title' => 'Filtry',
+        ],
         'items_per_page' => 'Elementów na stronę:',
         'last_page' => 'Ostatnia strona',
         'loading' => 'Ładowanie danych...',

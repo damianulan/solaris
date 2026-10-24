@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 import AuthShell from '../../components/auth/AuthShell.vue';
 import SubmitButton from '../../components/buttons/SubmitButton.vue';
+import TextInput from '../../components/forms/TextInput.vue';
 import { useTranslations } from '../../lib/translations';
 
 const props = defineProps<{
@@ -69,7 +70,7 @@ function submit(): void {
         </v-alert>
 
         <form novalidate @submit.prevent="submit">
-            <v-text-field
+            <TextInput
                 v-model="form.email"
                 autocomplete="email"
                 :error-messages="emailErrors()"
@@ -78,7 +79,6 @@ function submit(): void {
                 :placeholder="translate('frontend.auth.common.email_placeholder')"
                 prepend-inner-icon="bi-envelope"
                 type="email"
-                variant="outlined"
             />
 
             <SubmitButton

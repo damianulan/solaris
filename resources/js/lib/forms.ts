@@ -1,6 +1,6 @@
 export type FormMethod = 'patch' | 'post' | 'put';
 
-export type FormValue = boolean | File | File[] | null | number | string;
+export type FormValue = boolean | File | File[] | null | number | string | string[];
 
 export type FormValues = Record<string, FormValue>;
 
@@ -15,7 +15,10 @@ interface FormItemBase<TType extends string, TValue extends FormValue> {
     type: TType;
 }
 
-interface FormTextItem extends FormItemBase<'color' | 'email' | 'password' | 'search' | 'tel' | 'text' | 'url', string> {
+interface FormTextItem extends FormItemBase<'email' | 'password' | 'search' | 'tel' | 'text' | 'url', string> {
+}
+
+interface FormColorItem extends FormItemBase<'color', null | string> {
 }
 
 interface FormTextareaItem extends FormItemBase<'textarea', string> {
@@ -28,6 +31,10 @@ export interface FormOption {
 }
 
 interface FormSelectItem extends FormItemBase<'select', null | string> {
+    options: readonly FormOption[];
+}
+
+interface FormMultiselectItem extends FormItemBase<'multiselect', string[]> {
     options: readonly FormOption[];
 }
 
@@ -55,7 +62,7 @@ interface FormRangeItem extends FormItemBase<'range', number> {
     thumbLabel?: boolean | 'always' | 'hover';
 }
 
-interface FormDateItem extends FormItemBase<'date' | 'datetime-local' | 'month' | 'time' | 'week', null | string> {
+interface FormDateItem extends FormItemBase<'date' | 'datetime' | 'datetime-local' | 'month' | 'time' | 'week', null | string> {
     max?: string;
     min?: string;
 }
@@ -75,9 +82,11 @@ interface FormFilepondItem extends FormItemBase<'filepond', null | string> {
 export type FormItem =
     | FormBooleanItem
     | FormChoiceItem
+    | FormColorItem
     | FormDateItem
     | FormFileItem
     | FormFilepondItem
+    | FormMultiselectItem
     | FormNumberItem
     | FormRangeItem
     | FormSelectItem

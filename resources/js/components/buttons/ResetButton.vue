@@ -23,8 +23,9 @@ withDefaults(defineProps<{
         :disabled="disabled"
         :loading="loading"
         :prepend-icon="prependIcon"
+        :rounded="false"
         type="reset"
-        variant="outlined"
+        variant="tonal"
     >
         <template v-if="$slots.prepend" #prepend>
             <slot name="prepend" />
@@ -44,6 +45,7 @@ withDefaults(defineProps<{
 
 <style scoped>
 .app-button {
+    border: 2px solid currentColor;
     font-weight: 600;
     letter-spacing: normal;
     text-transform: none;

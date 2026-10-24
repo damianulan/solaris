@@ -1,8 +1,11 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import { useTranslations } from '../../lib/translations';
 import type { DataTableBlueprint } from '../../lib/types';
 import ConfirmationDialog from '../dialogs/ConfirmationDialog.vue';
 import DataTableActionButtons from './DataTableActionButtons.vue';
+import DataTableFilters from './DataTableFilters.vue';
 import { useDataTable } from './useDataTable';
 import { useDataTableActions } from './useDataTableActions';
 
@@ -10,14 +13,23 @@ const props = defineProps<{
     table: DataTableBlueprint;
 }>();
 
+const filtersExpanded = defineModel<boolean>('filtersExpanded', { default: true });
+
 defineSlots<{
     actions?: (props: { selectedItems: Array<number | string> }) => unknown;
 }>();
 
 const { translate } = useTranslations();
+const expandedFilterPanel = computed<string | undefined>({
+    get: () => filtersExpanded.value ? 'filters' : undefined,
+    set: (panel) => {
+        filtersExpanded.value = panel === 'filters';
+    },
+});
 const {
     actionColumns,
     dataColumns,
+    filterTable,
     headers,
     isLoading,
     itemsPerPageOptions,
@@ -36,6 +48,29 @@ const {
 
 <template>
     <v-card class="data-table-card" border flat>
+        <v-expansion-panels
+            v-if="table.filters.length > 0"
+            v-model="expandedFilterPanel"
+            variant="accordion"
+        >
+            <v-expansion-panel value="filters" :rounded="false">
+                <v-expansion-panel-title :rounded="false" flat>
+                    <span class="d-flex align-center ga-2 font-weight-medium">
+                        <v-icon icon="bi-funnel" />
+                        {{ translate('frontend.data_table.filters.title') }}
+                    </span>
+                </v-expansion-panel-title>
+
+                <v-expansion-panel-text>
+                    <DataTableFilters
+                        :filters="table.filters"
+                        :loading="isLoading"
+                        @submit="filterTable"
+                    />
+                </v-expansion-panel-text>
+            </v-expansion-panel>
+        </v-expansion-panels>
+
         <div v-if="$slots.actions" class="data-table-actions d-flex flex-wrap justify-end ga-2 pa-4">
             <slot name="actions" :selected-items="selectedItems" />
         </div>

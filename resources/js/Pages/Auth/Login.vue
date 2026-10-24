@@ -4,6 +4,8 @@ import { ref } from 'vue';
 
 import AuthShell from '../../components/auth/AuthShell.vue';
 import SubmitButton from '../../components/buttons/SubmitButton.vue';
+import CheckboxInput from '../../components/forms/CheckboxInput.vue';
+import TextInput from '../../components/forms/TextInput.vue';
 import { useTranslations } from '../../lib/translations';
 import AppAlerts from '@/components/layout/feedback/AppAlerts.vue';
 
@@ -52,7 +54,7 @@ function submit(): void {
         <AppAlerts />
 
         <form novalidate @submit.prevent="submit">
-            <v-text-field
+            <TextInput
                 v-model="form.email"
                 autocomplete="email"
                 class="mb-2"
@@ -62,10 +64,9 @@ function submit(): void {
                 :placeholder="translate('frontend.auth.common.email_placeholder')"
                 prepend-inner-icon="bi-envelope"
                 type="email"
-                variant="outlined"
             />
 
-            <v-text-field
+            <TextInput
                 v-model="form.password"
                 autocomplete="current-password"
                 :append-inner-icon="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"
@@ -74,12 +75,11 @@ function submit(): void {
                 name="password"
                 prepend-inner-icon="bi-lock"
                 :type="isPasswordVisible ? 'text' : 'password'"
-                variant="outlined"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
             />
 
             <div class="form-options">
-                <v-checkbox
+                <CheckboxInput
                     v-model="form.remember"
                     color="primary"
                     density="compact"

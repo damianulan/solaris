@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 import AuthShell from '../../components/auth/AuthShell.vue';
 import SubmitButton from '../../components/buttons/SubmitButton.vue';
+import TextInput from '../../components/forms/TextInput.vue';
 import { useTranslations } from '../../lib/translations';
 
 const props = defineProps<{
@@ -63,7 +64,7 @@ function submit(): void {
         </v-alert>
 
         <form novalidate @submit.prevent="submit">
-            <v-text-field
+            <TextInput
                 v-model="form.password"
                 autocomplete="current-password"
                 :append-inner-icon="isPasswordVisible ? 'bi-eye-slash' : 'bi-eye'"
@@ -72,7 +73,6 @@ function submit(): void {
                 name="password"
                 prepend-inner-icon="bi-lock"
                 :type="isPasswordVisible ? 'text' : 'password'"
-                variant="outlined"
                 @click:append-inner="isPasswordVisible = !isPasswordVisible"
             />
 

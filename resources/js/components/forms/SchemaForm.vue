@@ -5,7 +5,20 @@ import { computed } from 'vue';
 import type { FormItem, FormSchema, FormValue, FormValues } from '../../lib/forms';
 import ResetButton from '../buttons/ResetButton.vue';
 import SubmitButton from '../buttons/SubmitButton.vue';
+import CheckboxInput from './CheckboxInput.vue';
+import ColorInput from './ColorInput.vue';
+import DateInput from './DateInput.vue';
+import DatetimeInput from './DatetimeInput.vue';
+import FileInput from './FileInput.vue';
 import FilepondInput from './FilepondInput.vue';
+import MultiselectInput from './MultiselectInput.vue';
+import NumberInput from './NumberInput.vue';
+import RadioInput from './RadioInput.vue';
+import RangeInput from './RangeInput.vue';
+import SelectInput from './SelectInput.vue';
+import SwitchInput from './SwitchInput.vue';
+import TextareaInput from './TextareaInput.vue';
+import TextInput from './TextInput.vue';
 
 const props = defineProps<{
     schema: FormSchema;
@@ -38,17 +51,25 @@ function errorMessages(name: string): string[] {
 function fileValue(name: string): File | File[] | null {
     const value = form[name];
 
-    if (value instanceof File || Array.isArray(value)) {
+    if (value instanceof File || (Array.isArray(value) && value.every((item) => item instanceof File))) {
         return value;
     }
 
     return null;
 }
 
-function numberValue(name: string): number | undefined {
+function booleanValue(name: string): boolean {
+    return form[name] === true;
+}
+
+function numberValue(name: string): number | null {
     const value = form[name];
 
-    return typeof value === 'number' ? value : undefined;
+    return typeof value === 'number' ? value : null;
+}
+
+function rangeValue(name: string): number {
+    return numberValue(name) ?? 0;
 }
 
 function stringValue(name: string): string | null {
@@ -57,15 +78,34 @@ function stringValue(name: string): string | null {
     return typeof value === 'string' ? value : null;
 }
 
-function setValue(item: FormItem, value: unknown): void {
-    if (item.type === 'number' || item.type === 'range') {
-        const numberValue = value === '' || value === null ? null : Number(value);
+function stringArrayValue(name: string): string[] {
+    const value = form[name];
 
-        if (numberValue === null || Number.isNaN(numberValue)) {
+    return Array.isArray(value) && value.every((item) => typeof item === 'string') ? value : [];
+}
+
+function setValue(item: FormItem, value: unknown): void {
+    if (item.type === 'number') {
+        const normalizedValue = value === '' || value === null ? null : Number(value);
+
+        if (normalizedValue !== null && Number.isNaN(normalizedValue)) {
             return;
         }
 
-        form[item.name] = numberValue;
+        form[item.name] = normalizedValue;
+        form.clearErrors(item.name);
+
+        return;
+    }
+
+    if (item.type === 'range') {
+        const normalizedValue = Number(value);
+
+        if (Number.isNaN(normalizedValue)) {
+            return;
+        }
+
+        form[item.name] = normalizedValue;
         form.clearErrors(item.name);
 
         return;
@@ -92,7 +132,7 @@ function isFormValue(value: unknown): value is FormValue {
         || typeof value === 'number'
         || typeof value === 'string'
         || value instanceof File
-        || (Array.isArray(value) && value.every((item) => item instanceof File));
+        || (Array.isArray(value) && value.every((item) => item instanceof File || typeof item === 'string'));
 }
 
 function submit(): void {
@@ -128,21 +168,20 @@ function reset(): void {
                 cols="12"
                 :md="item.columns ?? 12"
             >
-                <v-textarea
+                <TextareaInput
                     v-if="item.type === 'textarea'"
                     :autocomplete="item.autocomplete"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :label="item.label"
-                    :model-value="form[item.name]"
+                    :model-value="stringValue(item.name)"
                     :name="item.name"
                     :placeholder="item.placeholder"
                     :rows="item.rows ?? 4"
-                    variant="outlined"
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-select
+                <SelectInput
                     v-else-if="item.type === 'select'"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
@@ -150,61 +189,67 @@ function reset(): void {
                     item-value="value"
                     :items="item.options"
                     :label="item.label"
-                    :model-value="form[item.name]"
+                    :model-value="stringValue(item.name)"
                     :name="item.name"
-                    variant="outlined"
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-radio-group
+                <MultiselectInput
+                    v-else-if="item.type === 'multiselect'"
+                    :error-messages="errorMessages(item.name)"
+                    :hint="item.hint"
+                    item-title="label"
+                    item-value="value"
+                    :items="item.options"
+                    :label="item.label"
+                    :model-value="stringArrayValue(item.name)"
+                    :name="item.name"
+                    @update:model-value="setValue(item, $event)"
+                />
+
+                <RadioInput
                     v-else-if="item.type === 'radio'"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :inline="item.inline"
                     :label="item.label"
-                    :model-value="form[item.name]"
+                    :model-value="stringValue(item.name)"
                     :name="item.name"
+                    :options="item.options"
                     @update:model-value="setValue(item, $event)"
-                >
-                    <v-radio
-                        v-for="option in item.options"
-                        :key="option.value"
-                        :label="option.label"
-                        :value="option.value"
-                    />
-                </v-radio-group>
+                />
 
-                <v-switch
+                <SwitchInput
                     v-else-if="item.type === 'switch'"
                     :color="item.color"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :inset="item.inset"
                     :label="item.label"
-                    :model-value="form[item.name]"
+                    :model-value="booleanValue(item.name)"
                     :name="item.name"
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-checkbox
+                <CheckboxInput
                     v-else-if="item.type === 'checkbox'"
                     :color="item.color"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :label="item.label"
-                    :model-value="form[item.name]"
+                    :model-value="booleanValue(item.name)"
                     :name="item.name"
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-slider
+                <RangeInput
                     v-else-if="item.type === 'range'"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :label="item.label"
                     :max="item.max"
                     :min="item.min"
-                    :model-value="numberValue(item.name)"
+                    :model-value="rangeValue(item.name)"
                     :name="item.name"
                     :show-ticks="item.showTicks"
                     :step="item.step ?? 1"
@@ -212,7 +257,7 @@ function reset(): void {
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-file-input
+                <FileInput
                     v-else-if="item.type === 'file'"
                     :accept="item.accept"
                     clearable
@@ -223,7 +268,6 @@ function reset(): void {
                     :multiple="item.multiple"
                     :name="item.name"
                     :show-size="item.showSize"
-                    variant="outlined"
                     @update:model-value="setFileValue(item, $event)"
                 />
 
@@ -241,7 +285,7 @@ function reset(): void {
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-text-field
+                <NumberInput
                     v-else-if="item.type === 'number'"
                     :autocomplete="item.autocomplete"
                     :error-messages="errorMessages(item.name)"
@@ -249,45 +293,59 @@ function reset(): void {
                     :label="item.label"
                     :max="item.max"
                     :min="item.min"
-                    :model-value="form[item.name]"
+                    :model-value="numberValue(item.name)"
                     :name="item.name"
                     :placeholder="item.placeholder"
                     :step="item.step"
-                    type="number"
-                    variant="outlined"
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-text-field
-                    v-else-if="item.type === 'date'
-                        || item.type === 'datetime-local'
-                        || item.type === 'month'
-                        || item.type === 'time'
-                        || item.type === 'week'"
+                <DateInput
+                    v-else-if="item.type === 'date'"
                     :autocomplete="item.autocomplete"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :label="item.label"
                     :max="item.max"
                     :min="item.min"
-                    :model-value="form[item.name]"
+                    :model-value="stringValue(item.name)"
                     :name="item.name"
-                    :type="item.type"
-                    variant="outlined"
                     @update:model-value="setValue(item, $event)"
                 />
 
-                <v-text-field
+                <DatetimeInput
+                    v-else-if="item.type === 'datetime' || item.type === 'datetime-local'"
+                    :autocomplete="item.autocomplete"
+                    :error-messages="errorMessages(item.name)"
+                    :hint="item.hint"
+                    :label="item.label"
+                    :max="item.max"
+                    :min="item.min"
+                    :model-value="stringValue(item.name)"
+                    :name="item.name"
+                    @update:model-value="setValue(item, $event)"
+                />
+
+                <ColorInput
+                    v-else-if="item.type === 'color'"
+                    :error-messages="errorMessages(item.name)"
+                    :hint="item.hint"
+                    :label="item.label"
+                    :model-value="stringValue(item.name)"
+                    :name="item.name"
+                    @update:model-value="setValue(item, $event)"
+                />
+
+                <TextInput
                     v-else
                     :autocomplete="item.autocomplete"
                     :error-messages="errorMessages(item.name)"
                     :hint="item.hint"
                     :label="item.label"
-                    :model-value="form[item.name]"
+                    :model-value="stringValue(item.name)"
                     :name="item.name"
                     :placeholder="item.placeholder"
                     :type="item.type"
-                    variant="outlined"
                     @update:model-value="setValue(item, $event)"
                 />
             </v-col>
