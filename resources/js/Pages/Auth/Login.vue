@@ -5,7 +5,7 @@ import { ref } from 'vue';
 import AuthShell from '../../components/auth/AuthShell.vue';
 import SubmitButton from '../../components/buttons/SubmitButton.vue';
 import { useTranslations } from '../../lib/translations';
-import AppAlerts from '@/components/layout/AppAlerts.vue';
+import AppAlerts from '@/components/layout/feedback/AppAlerts.vue';
 
 const props = defineProps<{
     homeUrl: string;

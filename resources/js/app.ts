@@ -7,9 +7,9 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import 'vuetify/styles';
 
 import { createInertiaApp } from '@inertiajs/vue3';
-import { createApp, h, type DefineComponent } from 'vue';
+import { createApp, createSSRApp, h, type DefineComponent } from 'vue';
 
-import AppLoadingOverlay from './components/layout/AppLoadingOverlay.vue';
+import AppLoadingOverlay from './components/layout/feedback/AppLoadingOverlay.vue';
 import { translateMessage } from './lib/translations';
 import createVuetifyPlugin from './plugins/vuetify';
 
@@ -32,9 +32,16 @@ createInertiaApp({
         return page().then((module) => module.default);
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => [h(App, props), h(AppLoadingOverlay)] })
-            .use(plugin)
-            .use(createVuetifyPlugin(props.initialPage.props.theme))
-            .mount(el);
+        const vueApp = (el === null || el.hasAttribute('data-server-rendered') ? createSSRApp : createApp)({
+            render: () => [h(App, props), h(AppLoadingOverlay)],
+        });
+
+        vueApp.use(plugin).use(createVuetifyPlugin(props.initialPage.props.theme));
+
+        if (el) {
+            vueApp.mount(el);
+        }
+
+        return vueApp;
     },
 });

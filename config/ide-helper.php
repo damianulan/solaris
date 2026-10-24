@@ -143,6 +143,8 @@ return [
 
     'model_locations' => [
         'app',
+        'modules/*/src/Models',
+        'vendor/damianulan/*/src'
     ],
 
     /*

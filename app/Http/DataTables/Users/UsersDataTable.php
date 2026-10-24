@@ -66,7 +66,7 @@ class UsersDataTable extends DataTableBlueprint
             (new ActionColumn)
                 ->label($this->label('frontend.data_table.columns.actions'))
                 ->addButton(fn (array $resource): array => [
-                    'color' => 'primary',
+                    'color' => 'secondary',
                     'href' => $this->resourceUrl($resource, 'editUrl'),
                     'icon' => 'bi-pencil-fill',
                     'title' => $this->label('frontend.data_table.actions.edit'),

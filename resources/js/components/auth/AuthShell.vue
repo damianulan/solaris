@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useTranslations } from '../../lib/translations';
-import AppBrand from '../layout/AppBrand.vue';
-import ThemeSwitcher from '../layout/ThemeSwitcher.vue';
-import AppSnackbars from '../layout/AppSnackbars.vue';
+import AppBrand from '../layout/branding/AppBrand.vue';
+import AppSnackbars from '../layout/feedback/AppSnackbars.vue';
+import ThemeSwitcher from '../layout/navigation/ThemeSwitcher.vue';
 
 defineProps<{
     description: string;

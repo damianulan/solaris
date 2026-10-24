@@ -78,6 +78,7 @@ const aliases = {
 
 const createVuetifyPlugin = (theme: Theme) =>
     createVuetify({
+        ssr: true,
         theme: {
             defaultTheme: theme.variant,
             themes: {

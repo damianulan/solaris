@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solaris Development"
+  short_description: "Apply Solaris module and Vue conventions"
+  default_prompt: "Use $solaris-development to place this change in the correct Solaris module, use the intended damianulan packages, and reuse the existing Vue components."

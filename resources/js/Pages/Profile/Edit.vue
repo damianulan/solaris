@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import AppLayout from '../../components/layout/AppLayout.vue';
+import AppLayout from '../../components/layout/shell/AppLayout.vue';
 import SchemaForm from '../../components/forms/SchemaForm.vue';
 import type { FormSchema } from '../../lib/forms';
 import { useTranslations } from '../../lib/translations';

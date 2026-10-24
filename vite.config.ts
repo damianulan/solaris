@@ -19,6 +19,9 @@ export default defineConfig({
             '@': '/resources/js',
         },
     },
+    ssr: {
+        noExternal: ['vuetify'],
+    },
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**', '**/.agents/**', '**/.codex/**'],

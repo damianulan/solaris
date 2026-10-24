@@ -29,7 +29,7 @@
         "phpoffice/phpword": "^1.4.0",
         "predis/predis": "^v3.4.2",
         "rahulhaque/laravel-filepond": "^v13",
-        "spatie/laravel-activitylog": "^5.0",
+        "spatie/laravel-activitylog": "^5.1",
         "spatie/laravel-data": "^4.23",
         "spatie/laravel-settings": "^3.1",
         "spatie/laravel-tags": "^4.10",
