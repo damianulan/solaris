@@ -4,16 +4,17 @@ namespace App\Http\Filters\Users;
 
 use Nexus\Monolith\Filtering\Blueprints\Filter;
 use Illuminate\Contracts\Database\Query\Builder;
+use Nexus\Monolith\Filtering\Contracts\Types\TextFilter;
 
-class FullnameFilter extends Filter
+class FullnameFilter extends Filter implements TextFilter
 {
     public function getLabel(): string
     {
         return 'Imię i nazwisko';
     }
 
-    public function withQuery(Builder $query): Builder
+    public function withQuery(Builder $query): void
     {
-        return $query->where('fullname', 'like', '%' . $this->getValue() . '%');
+        $query->where('firstname', 'like', '%' . $this->getValue() . '%');
     }
 }

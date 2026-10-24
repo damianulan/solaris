@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\DataTables\Users;
 
+use App\Http\Filters\Users\FullnameFilter;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +13,8 @@ use Nexus\Monolith\DataTable\Blueprints\ActionColumn;
 use Nexus\Monolith\DataTable\Blueprints\DataTableBlueprint;
 use Nexus\Monolith\DataTable\Blueprints\DataColumn;
 use Nexus\Monolith\DataTable\Blueprints\SelectableColumn;
+use Nexus\Monolith\Filtering\Facades\Filters;
+use Nexus\Monolith\Filtering\Blueprints\FilterBag;
 use UnexpectedValueException;
 
 class UsersDataTable extends DataTableBlueprint
@@ -102,15 +105,9 @@ class UsersDataTable extends DataTableBlueprint
         ];
     }
 
-    private function label(string $key): string
+    protected function getFilters(): FilterBag
     {
-        $label = __($key);
-
-        if (! is_string($label)) {
-            throw new UnexpectedValueException("The translation [{$key}] must be a string.");
-        }
-
-        return $label;
+        return Filters::add(FullnameFilter::class, 12);
     }
 
     private function requestedSortColumn(): ?string
