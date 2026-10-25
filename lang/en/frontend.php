@@ -119,10 +119,14 @@ return [
     'home' => [
         'title' => 'Welcome',
     ],
+    'locale' => [
+        'open_menu' => 'Change language',
+    ],
     'navigation' => [
         'enterprise' => 'Enterprise',
         'home' => 'Home',
         'toggle' => 'Toggle navigation',
+        'users' => 'Users',
     ],
     'profile' => [
         'avatar' => 'Avatar',

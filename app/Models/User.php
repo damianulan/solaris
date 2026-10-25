@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,6 +11,7 @@ use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Nexus\Auth\AuthorizableModel;
 use Nexus\Enums\Auth\AuthType;
+use Modules\Enterprise\Concerns\HasEnterpriseRelationships;
 
 /**
  * @property int $id
@@ -63,11 +66,13 @@ use Nexus\Enums\Auth\AuthType;
  * @method static \Nexus\Auth\Builders\UserBuilder<static>|User whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @mixin \Eloquent
+ * @mixin \Illuminate\Database\Eloquent\Model
  */
 #[Hidden(['password', 'remember_token', 'ia'])]
 class User extends AuthorizableModel
 {
+    use HasEnterpriseRelationships;
+
     /** @use HasFactory<UserFactory> */
     use HasFactory;
 

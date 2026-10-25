@@ -6,6 +6,7 @@ import type { Alert, AuthContext, Banner, Localization, NavigationElement, Page,
 declare module '@inertiajs/core' {
     interface PageProps {
         auth: AuthContext;
+        availableLocales: string[];
         localization: Localization;
         sidebar: NavigationElement[];
         theme: Theme;

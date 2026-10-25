@@ -1,0 +1,1 @@
+import{Mr as e,gr as t,ur as n}from"./icons-RuIEci8H.js";import{t as r}from"./AppLayout-BAidUQYj.js";var i=t({__name:`Home`,setup(t){return(t,i)=>(e(),n(r))}});export{i as default};

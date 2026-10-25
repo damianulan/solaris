@@ -26,10 +26,7 @@ enum RoleRegistry: string implements RoleRegistryContract
         return [
             self::Root->value => ['*'],
             self::Administrator->value => [
-                PermissionRegistry::ViewUsers->value,
-                PermissionRegistry::UpdateUsers->value,
-                PermissionRegistry::DeleteUsers->value,
-                PermissionRegistry::SuspendUsers->value,
+                PermissionRegistry::ManageUsers->value,
             ],
         ];
     }

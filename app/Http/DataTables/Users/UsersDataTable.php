@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\DataTables\Users;
 
+use App\Authorization\PermissionRegistry;
 use App\Http\Filters\Users\FullnameFilter;
 use App\Http\Resources\UserResource;
 use App\Models\User;
@@ -18,6 +19,12 @@ use UnexpectedValueException;
 
 class UsersDataTable extends DataTableBlueprint
 {
+    private readonly bool $canDeleteUsers;
+
+    private readonly bool $canSuspendUsers;
+
+    private readonly bool $canUpdateUsers;
+
     /**
      * @var array<string, list<string>>
      */
@@ -28,6 +35,14 @@ class UsersDataTable extends DataTableBlueprint
 
     public function __construct(private readonly Request $request)
     {
+        $authenticatedUser = $request->user();
+        $this->canDeleteUsers = $authenticatedUser instanceof User
+            && $authenticatedUser->hasSystemPermission(PermissionRegistry::DeleteUsers);
+        $this->canSuspendUsers = $authenticatedUser instanceof User
+            && $authenticatedUser->hasSystemPermission(PermissionRegistry::SuspendUsers);
+        $this->canUpdateUsers = $authenticatedUser instanceof User
+            && $authenticatedUser->hasSystemPermission(PermissionRegistry::UpdateUsers);
+
         parent::__construct($request);
     }
 
@@ -69,6 +84,7 @@ class UsersDataTable extends DataTableBlueprint
                 ->label($this->label('frontend.data_table.columns.actions'))
                 ->addButton(fn (array $resource): array => [
                     'color' => 'secondary',
+                    'disabled' => ! $this->canUpdateUsers,
                     'href' => $this->resourceUrl($resource, 'editUrl'),
                     'icon' => 'bi-pencil-fill',
                     'title' => $this->label('frontend.data_table.actions.edit'),
@@ -77,6 +93,7 @@ class UsersDataTable extends DataTableBlueprint
                     'color' => 'warning',
                     'confirm' => $this->label('frontend.data_table.actions.suspend_confirmation'),
                     'disabled' => ($resource['isSuspended'] ?? false) === true
+                        || ! $this->canSuspendUsers
                         || $this->isAuthenticatedUser($resource),
                     'href' => $this->resourceUrl($resource, 'suspendUrl'),
                     'icon' => 'bi-person-x-fill',
@@ -90,7 +107,7 @@ class UsersDataTable extends DataTableBlueprint
                 ->addButton(fn (array $resource): array => [
                     'color' => 'error',
                     'confirm' => $this->label('frontend.data_table.actions.delete_confirmation'),
-                    'disabled' => $this->isAuthenticatedUser($resource),
+                    'disabled' => ! $this->canDeleteUsers || $this->isAuthenticatedUser($resource),
                     'href' => $this->resourceUrl($resource, 'deleteUrl'),
                     'icon' => 'bi-trash-fill',
                     'method' => 'delete',

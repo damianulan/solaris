@@ -119,10 +119,14 @@ return [
     'home' => [
         'title' => 'Witamy',
     ],
+    'locale' => [
+        'open_menu' => 'Zmień język',
+    ],
     'navigation' => [
         'enterprise' => 'Przedsiębiorstwo',
         'home' => 'Strona główna',
         'toggle' => 'Przełącz nawigację',
+        'users' => 'Użytkownicy',
     ],
     'profile' => [
         'avatar' => 'Awatar',

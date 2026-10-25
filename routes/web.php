@@ -13,6 +13,7 @@ Route::middleware('web')->group(function () {
         Route::get('/', [HomeController::class, 'index'])->name('home')->header('Home')->description('Welcome to Solaris');
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->header('Edit profile')->description('Update your profile details');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        Route::get('/users', [UserController::class, 'index'])->name('users.index')->header('Users')->description('Manage application users');
         Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit')->header('Edit user')->description('Update user details');
         Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');

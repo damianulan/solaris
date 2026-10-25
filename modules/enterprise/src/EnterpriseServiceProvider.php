@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Modules\Enterprise;
 
 use Illuminate\Support\ServiceProvider;
@@ -16,11 +18,15 @@ class EnterpriseServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/enterprise.php', 'enterprise');
-        $this->app->bind('test', fn() => 'test');
+        $this->app->bind('test', fn () => 'test');
     }
 
     public function boot(): void
     {
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+
+        $navigationTitle = __('frontend.navigation.enterprise');
+
         $this->publishes([
             __DIR__ . '/../config/enterprise.php' => config_path('enterprise.php'),
         ], 'modularis-config');
@@ -38,7 +44,11 @@ class EnterpriseServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
 
         Sidebar::add(
-            NavigationItem::make(__('frontend.navigation.enterprise'), 'enterprise.index', 'bi-building')
+            NavigationItem::make(
+                is_string($navigationTitle) ? $navigationTitle : 'Enterprise',
+                'enterprise.index',
+                'bi-building',
+            )
         );
     }
 

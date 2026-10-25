@@ -7,10 +7,13 @@ namespace App\Http\Controllers\Users;
 use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\SuspendUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\DataTables\Users\UsersDataTable;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -18,8 +21,19 @@ use Nexus\Http\Controllers\BaseController;
 
 final class UserController extends BaseController
 {
+    public function index(Request $request): Response
+    {
+        Gate::authorize('viewAny', User::class);
+
+        return Inertia::render('Users/Index', [
+            'table' => (new UsersDataTable($request))->toArray(),
+        ]);
+    }
+
     public function edit(User $user): Response
     {
+        Gate::authorize('view', $user);
+
         $availableLocales = config('app.available_locales', []);
 
         return Inertia::render('Profile/Edit', [

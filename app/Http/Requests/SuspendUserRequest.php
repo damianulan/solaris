@@ -16,7 +16,7 @@ final class SuspendUserRequest extends FormRequest
 
         return $authenticatedUser instanceof User
             && $targetUser instanceof User
-            && ! $authenticatedUser->is($targetUser);
+            && $authenticatedUser->can('suspend', $targetUser);
     }
 
     /**

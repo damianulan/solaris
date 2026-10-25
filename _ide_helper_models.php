@@ -66,8 +66,215 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
  * @mixin \Eloquent
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $activeEmployments
+ * @property-read int|null $active_employments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $employments
+ * @property-read int|null $employments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managedUsers
+ * @property-read int|null $managed_users_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\ManagerAssignment> $managerAssignments
+ * @property-read int|null $manager_assignments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, User> $managers
+ * @property-read int|null $managers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\ManagerAssignment> $reportingAssignments
+ * @property-read int|null $reporting_assignments_count
+ * @method static \Nexus\Auth\Builders\UserBuilder<static>|User withPermission(?mixed ...$permissions)
+ * @method static \Nexus\Auth\Builders\UserBuilder<static>|User withRole(?mixed ...$roles)
  */
 	class User extends \Eloquent {}
+}
+
+namespace Modules\Enterprise\Models{
+/**
+ * @property int $id
+ * @property string $code
+ * @property string $name
+ * @property string|null $legal_name
+ * @property string|null $registration_number
+ * @property string|null $tax_identifier
+ * @property string|null $email
+ * @property string|null $phone
+ * @property string|null $website
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\ContractType> $contractTypes
+ * @property-read int|null $contract_types_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Department> $departments
+ * @property-read int|null $departments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $employments
+ * @property-read int|null $employments_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\ManagerAssignment> $managerAssignments
+ * @property-read int|null $manager_assignments_count
+ * @method static \Modules\Enterprise\Database\Factories\CompanyFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereLegalName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereRegistrationNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereTaxIdentifier($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company whereWebsite($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Company withoutTrashed()
+ */
+	class Company extends \Eloquent {}
+}
+
+namespace Modules\Enterprise\Models{
+/**
+ * @property int $id
+ * @property int $company_id
+ * @property string $code
+ * @property string $name
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Modules\Enterprise\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $employments
+ * @property-read int|null $employments_count
+ * @method static \Modules\Enterprise\Database\Factories\ContractTypeFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ContractType withoutTrashed()
+ */
+	class ContractType extends \Eloquent {}
+}
+
+namespace Modules\Enterprise\Models{
+/**
+ * @property int $id
+ * @property int $company_id
+ * @property int|null $parent_id
+ * @property string $code
+ * @property string $name
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, Department> $children
+ * @property-read int|null $children_count
+ * @property-read \Modules\Enterprise\Models\Company|null $company
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $employments
+ * @property-read int|null $employments_count
+ * @property-read Department|null $parent
+ * @method static \Modules\Enterprise\Database\Factories\DepartmentFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Department withoutTrashed()
+ */
+	class Department extends \Eloquent {}
+}
+
+namespace Modules\Enterprise\Models{
+/**
+ * @property int $id
+ * @property int $user_id
+ * @property int $company_id
+ * @property int|null $department_id
+ * @property int $contract_type_id
+ * @property string|null $employee_number
+ * @property string|null $position_title
+ * @property \Illuminate\Support\Carbon $started_on
+ * @property \Illuminate\Support\Carbon|null $ended_on
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Modules\Enterprise\Models\Company|null $company
+ * @property-read \Modules\Enterprise\Models\ContractType|null $contractType
+ * @property-read \Modules\Enterprise\Models\Department|null $department
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment active(?\Carbon\CarbonInterface $at = null)
+ * @method static \Modules\Enterprise\Database\Factories\EmploymentFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereContractTypeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereDepartmentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereEmployeeNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereEndedOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment wherePositionTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereStartedOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Employment withoutTrashed()
+ */
+	class Employment extends \Eloquent {}
+}
+
+namespace Modules\Enterprise\Models{
+/**
+ * @property int $id
+ * @property int $company_id
+ * @property int $manager_user_id
+ * @property int $employee_user_id
+ * @property \Illuminate\Support\Carbon $started_on
+ * @property \Illuminate\Support\Carbon|null $ended_on
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \Modules\Enterprise\Models\Company|null $company
+ * @property-read \App\Models\User|null $employee
+ * @property-read \App\Models\User|null $manager
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment active(?\Carbon\CarbonInterface $at = null)
+ * @method static \Modules\Enterprise\Database\Factories\ManagerAssignmentFactory factory($count = null, $state = [])
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereEmployeeUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereEndedOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereManagerUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereStartedOn($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment withTrashed(bool $withTrashed = true)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|ManagerAssignment withoutTrashed()
+ */
+	class ManagerAssignment extends \Eloquent {}
 }
 
 namespace Modularis\Models{
@@ -113,28 +320,42 @@ namespace Nexus\Auth{
 
 namespace Sentinel\Models{
 /**
- * @property-read Collection<int, \Sentinel\Models\Role> $roles
+ * @property int|string $id
+ * @property string $slug
+ * @property bool $assignable
  * @property-read int|null $roles_count
- * @method static Builder<static>|Permission newModelQuery()
- * @method static Builder<static>|Permission newQuery()
- * @method static Builder<static>|Permission query()
- * @method static Builder<static>|Permission whereAssignable()
- * @method static Builder<static>|Permission whereSlug(...$slugs)
- * @mixin \Eloquent
+ * @method static Builder<static> whereAssignable()
+ * @method static Builder<static> whereSlug(string ...$slugs)
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Role> $roles
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Permission whereUpdatedAt($value)
  */
 	class Permission extends \Eloquent implements \Sentinel\Contracts\PermissionContract {}
 }
 
 namespace Sentinel\Models{
 /**
- * @property-read Collection<int, \Sentinel\Models\Permission> $permissions
+ * @property int|string $id
+ * @property string $slug
+ * @property bool $assignable
  * @property-read int|null $permissions_count
- * @method static Builder<static>|Role newModelQuery()
- * @method static Builder<static>|Role newQuery()
- * @method static Builder<static>|Role query()
- * @method static Builder<static>|Role whereAssignable()
- * @method static Builder<static>|Role whereSlug(...$slugs)
- * @mixin \Eloquent
+ * @method static Builder<static> whereAssignable()
+ * @method static Builder<static> whereSlug(string ...$slugs)
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Sentinel\Models\Permission> $permissions
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role query()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Role whereUpdatedAt($value)
  */
 	class Role extends \Eloquent implements \Sentinel\Contracts\RoleContract {}
 }

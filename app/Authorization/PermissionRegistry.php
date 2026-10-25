@@ -8,6 +8,7 @@ use Sentinel\Contracts\PermissionRegistryContract;
 
 enum PermissionRegistry: string implements PermissionRegistryContract
 {
+    case ManageUsers = 'users.*';
     case ViewUsers = 'users.view';
     case UpdateUsers = 'users.update';
     case DeleteUsers = 'users.delete';
@@ -16,6 +17,7 @@ enum PermissionRegistry: string implements PermissionRegistryContract
     public static function permissions(): array
     {
         return [
+            self::ManageUsers->value => true,
             self::ViewUsers->value => true,
             self::UpdateUsers->value => true,
             self::DeleteUsers->value => true,

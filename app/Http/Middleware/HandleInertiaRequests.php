@@ -14,6 +14,7 @@ class HandleInertiaRequests extends InertiaMiddleware
         return [
             ...parent::share($request),
             'auth.user' => fn (): ?array => $this->authenticatedUser($request),
+            'availableLocales' => LocaleMiddleware::availableLocales(),
             'banner' => fn (): array | string | null => $this->banner($request),
         ];
     }

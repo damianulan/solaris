@@ -16,7 +16,7 @@ final class DeleteUserRequest extends FormRequest
 
         return $authenticatedUser instanceof User
             && $targetUser instanceof User
-            && ! $authenticatedUser->is($targetUser);
+            && $authenticatedUser->can('delete', $targetUser);
     }
 
     /**
