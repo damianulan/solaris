@@ -18,6 +18,6 @@ class FullnameFilter extends Filter implements TextFilter
 
     public function withQuery(Builder $query): void
     {
-        $this->nameSearch($query, $this->getValue(), ['firstname', 'lastname']);
+        $this->nameSearch($query, $this->getValue(), ['firstname', 'middlename', 'lastname']);
     }
 }

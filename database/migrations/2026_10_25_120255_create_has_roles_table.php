@@ -1,0 +1,32 @@
+<?php
+
+declare(strict_types=1);
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('has_roles', function (Blueprint $table): void {
+            $table->morphs('model', 'model_morph');
+            $table->foreignId('role_id')->constrained('roles')->cascadeOnDelete();
+            $table->morphs('context', 'context_morph');
+
+            $table->primary(['model_type', 'model_id', 'role_id', 'context_type', 'context_id']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('has_roles');
+    }
+};

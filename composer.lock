@@ -299,12 +299,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/damianulan/laravel-modularis.git",
-                "reference": "8f9588be3af922f3211c4ff3a7aa0ef6db16e208"
+                "reference": "6e25cefde97112d7171184d2e25e874ed69a7a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/damianulan/laravel-modularis/zipball/8f9588be3af922f3211c4ff3a7aa0ef6db16e208",
-                "reference": "8f9588be3af922f3211c4ff3a7aa0ef6db16e208",
+                "url": "https://api.github.com/repos/damianulan/laravel-modularis/zipball/6e25cefde97112d7171184d2e25e874ed69a7a56",
+                "reference": "6e25cefde97112d7171184d2e25e874ed69a7a56",
                 "shasum": ""
             },
             "require": {
@@ -366,7 +366,7 @@
                 "issues": "https://github.com/damianulan/laravel-modularis/issues",
                 "source": "https://github.com/damianulan/laravel-modularis/tree/main"
             },
-            "time": "2026-10-18T14:00:07+00:00"
+            "time": "2026-10-25T10:32:36+00:00"
         },
         {
             "name": "damianulan/laravel-nexus",
@@ -374,12 +374,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/damianulan/laravel-nexus.git",
-                "reference": "92354d4ebc9e7cf53636393a151cb060bc719ce0"
+                "reference": "91d3edb66c482191beed1f5ef0ce12411afcd282"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/damianulan/laravel-nexus/zipball/92354d4ebc9e7cf53636393a151cb060bc719ce0",
-                "reference": "92354d4ebc9e7cf53636393a151cb060bc719ce0",
+                "url": "https://api.github.com/repos/damianulan/laravel-nexus/zipball/91d3edb66c482191beed1f5ef0ce12411afcd282",
+                "reference": "91d3edb66c482191beed1f5ef0ce12411afcd282",
                 "shasum": ""
             },
             "require": {
@@ -441,7 +441,7 @@
                 "issues": "https://github.com/damianulan/laravel-nexus/issues",
                 "source": "https://github.com/damianulan/laravel-nexus/tree/main"
             },
-            "time": "2026-10-24T14:21:22+00:00"
+            "time": "2026-10-25T10:32:12+00:00"
         },
         {
             "name": "damianulan/laravel-sentinel",
@@ -449,12 +449,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/damianulan/laravel-sentinel.git",
-                "reference": "3e5cd785c81c3f6f1ef3765c7df479fe72f2ec03"
+                "reference": "4fc6ac2429830345050e2c2afa1cf37d2783f89d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/damianulan/laravel-sentinel/zipball/3e5cd785c81c3f6f1ef3765c7df479fe72f2ec03",
-                "reference": "3e5cd785c81c3f6f1ef3765c7df479fe72f2ec03",
+                "url": "https://api.github.com/repos/damianulan/laravel-sentinel/zipball/4fc6ac2429830345050e2c2afa1cf37d2783f89d",
+                "reference": "4fc6ac2429830345050e2c2afa1cf37d2783f89d",
                 "shasum": ""
             },
             "require": {
@@ -476,18 +476,12 @@
             "type": "library",
             "extra": {
                 "laravel": {
-                    "aliases": {
-                        "Sentinel": "Sentinel\\Facades\\Sentinel"
-                    },
                     "providers": [
                         "Sentinel\\SentinelServiceProvider"
                     ]
                 }
             },
             "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ],
                 "psr-4": {
                     "Sentinel\\": "src"
                 }
@@ -515,7 +509,7 @@
                 "issues": "https://github.com/damianulan/laravel-sentinel/issues",
                 "source": "https://github.com/damianulan/laravel-sentinel/tree/main"
             },
-            "time": "2026-09-05T10:23:14+00:00"
+            "time": "2026-10-25T10:31:12+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
