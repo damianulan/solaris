@@ -1,106 +1,91 @@
 {
-  "_AppLayout-CyK1oWoy.css": {
-    "file": "assets/AppLayout-CyK1oWoy.css",
-    "src": "_AppLayout-CyK1oWoy.css"
+  "_AppAlerts-CvZC_5Nr.js": {
+    "file": "assets/AppAlerts-CvZC_5Nr.js",
+    "name": "AppAlerts",
+    "imports": [
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js"
+    ],
+    "css": [
+      "assets/AppAlerts-DCyuVH7W.css"
+    ]
   },
-  "_AppLayout-kDZxhYDm.js": {
-    "file": "assets/AppLayout-kDZxhYDm.js",
+  "_AppAlerts-DCyuVH7W.css": {
+    "file": "assets/AppAlerts-DCyuVH7W.css",
+    "src": "_AppAlerts-DCyuVH7W.css"
+  },
+  "_AppLayout-Gb4VkYks.css": {
+    "file": "assets/AppLayout-Gb4VkYks.css",
+    "src": "_AppLayout-Gb4VkYks.css"
+  },
+  "_AppLayout-jXxACfp_.js": {
+    "file": "assets/AppLayout-jXxACfp_.js",
     "name": "AppLayout",
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
       "resources/js/app.ts",
-      "_VCheckboxBtn-snHeYV_i.js"
+      "_AppAlerts-CvZC_5Nr.js"
     ],
     "css": [
-      "assets/AppLayout-CyK1oWoy.css"
+      "assets/AppLayout-Gb4VkYks.css"
     ]
   },
-  "_AuthShell-B2xU3kof.js": {
-    "file": "assets/AuthShell-B2xU3kof.js",
+  "_AuthShell-BO-Wdpzk.css": {
+    "file": "assets/AuthShell-BO-Wdpzk.css",
+    "src": "_AuthShell-BO-Wdpzk.css"
+  },
+  "_AuthShell-DM41rYk8.js": {
+    "file": "assets/AuthShell-DM41rYk8.js",
     "name": "AuthShell",
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js"
     ],
     "css": [
-      "assets/AuthShell-CsNkixKG.css"
+      "assets/AuthShell-BO-Wdpzk.css"
     ]
   },
-  "_AuthShell-CsNkixKG.css": {
-    "file": "assets/AuthShell-CsNkixKG.css",
-    "src": "_AuthShell-CsNkixKG.css"
+  "_CheckboxInput-ChRKi1kj.css": {
+    "file": "assets/CheckboxInput-ChRKi1kj.css",
+    "src": "_CheckboxInput-ChRKi1kj.css"
   },
-  "_SubmitButton-BdR4hLCi.js": {
-    "file": "assets/SubmitButton-BdR4hLCi.js",
-    "name": "SubmitButton",
+  "_CheckboxInput-D0cOv9-k.js": {
+    "file": "assets/CheckboxInput-D0cOv9-k.js",
+    "name": "CheckboxInput",
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AppAlerts-CvZC_5Nr.js"
     ],
     "css": [
-      "assets/SubmitButton-DDqUtnTN.css"
+      "assets/CheckboxInput-ChRKi1kj.css"
     ]
   },
-  "_SubmitButton-DDqUtnTN.css": {
-    "file": "assets/SubmitButton-DDqUtnTN.css",
-    "src": "_SubmitButton-DDqUtnTN.css"
-  },
-  "_VCheckbox-BjI5OXix.js": {
-    "file": "assets/VCheckbox-BjI5OXix.js",
-    "name": "VCheckbox",
+  "_VAlert-CXBzo4g8.js": {
+    "file": "assets/VAlert-CXBzo4g8.js",
+    "name": "VAlert",
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
-      "_VCheckboxBtn-snHeYV_i.js"
+      "_icons-RuIEci8H.js"
     ],
     "css": [
-      "assets/VCheckbox-ChRKi1kj.css"
+      "assets/VAlert-CkbY_7OR.css"
     ]
   },
-  "_VCheckbox-ChRKi1kj.css": {
-    "file": "assets/VCheckbox-ChRKi1kj.css",
-    "src": "_VCheckbox-ChRKi1kj.css"
-  },
-  "_VCheckboxBtn-DCyuVH7W.css": {
-    "file": "assets/VCheckboxBtn-DCyuVH7W.css",
-    "src": "_VCheckboxBtn-DCyuVH7W.css"
-  },
-  "_VCheckboxBtn-snHeYV_i.js": {
-    "file": "assets/VCheckboxBtn-snHeYV_i.js",
-    "name": "VCheckboxBtn",
-    "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js"
-    ],
-    "css": [
-      "assets/VCheckboxBtn-DCyuVH7W.css"
-    ]
-  },
-  "_VTextField-DFvrPu7b.js": {
-    "file": "assets/VTextField-DFvrPu7b.js",
-    "name": "VTextField",
-    "imports": [
-      "_icons-CR9S7nxO.js"
-    ],
-    "css": [
-      "assets/VTextField-DoVdM4jA.css"
-    ]
-  },
-  "_VTextField-DoVdM4jA.css": {
-    "file": "assets/VTextField-DoVdM4jA.css",
-    "src": "_VTextField-DoVdM4jA.css"
-  },
-  "_icons-CR9S7nxO.js": {
-    "file": "assets/icons-CR9S7nxO.js",
-    "name": "icons",
-    "css": [
-      "assets/icons-DG-PukqI.css"
-    ]
+  "_VAlert-CkbY_7OR.css": {
+    "file": "assets/VAlert-CkbY_7OR.css",
+    "src": "_VAlert-CkbY_7OR.css"
   },
   "_icons-DG-PukqI.css": {
     "file": "assets/icons-DG-PukqI.css",
     "src": "_icons-DG-PukqI.css"
+  },
+  "_icons-RuIEci8H.js": {
+    "file": "assets/icons-RuIEci8H.js",
+    "name": "icons",
+    "css": [
+      "assets/icons-DG-PukqI.css"
+    ]
   },
   "node_modules/@fontsource/jost/files/jost-cyrillic-400-normal.woff": {
     "file": "assets/jost-cyrillic-400-normal-Dk3McGkH.woff",
@@ -207,112 +192,107 @@
     "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
   },
   "resources/js/Pages/Auth/ConfirmPassword.vue": {
-    "file": "assets/ConfirmPassword-CMKguJZ7.js",
+    "file": "assets/ConfirmPassword-CVgHUONd.js",
     "name": "ConfirmPassword",
     "src": "resources/js/Pages/Auth/ConfirmPassword.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
-      "_AuthShell-B2xU3kof.js",
-      "_SubmitButton-BdR4hLCi.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AuthShell-DM41rYk8.js"
     ]
   },
   "resources/js/Pages/Auth/ForgotPassword.vue": {
-    "file": "assets/ForgotPassword-pzBi_Xoq.js",
+    "file": "assets/ForgotPassword-CW7ZVjcH.js",
     "name": "ForgotPassword",
     "src": "resources/js/Pages/Auth/ForgotPassword.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
-      "_AuthShell-B2xU3kof.js",
-      "_SubmitButton-BdR4hLCi.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AuthShell-DM41rYk8.js"
     ]
   },
   "resources/js/Pages/Auth/Login.vue": {
-    "file": "assets/Login-CryYdkPL.js",
+    "file": "assets/Login-D0feypro.js",
     "name": "Login",
     "src": "resources/js/Pages/Auth/Login.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
-      "_AuthShell-B2xU3kof.js",
-      "_SubmitButton-BdR4hLCi.js",
-      "_VCheckboxBtn-snHeYV_i.js",
-      "_VCheckbox-BjI5OXix.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AuthShell-DM41rYk8.js",
+      "_CheckboxInput-D0cOv9-k.js",
+      "_AppAlerts-CvZC_5Nr.js"
     ],
     "css": [
-      "assets/Login-C_6uNJOH.css"
+      "assets/Login-D9S1Oyx0.css"
     ]
   },
   "resources/js/Pages/Auth/Register.vue": {
-    "file": "assets/Register-ViB544GL.js",
+    "file": "assets/Register-Dzcmdzk-.js",
     "name": "Register",
     "src": "resources/js/Pages/Auth/Register.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
-      "_AuthShell-B2xU3kof.js",
-      "_SubmitButton-BdR4hLCi.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AuthShell-DM41rYk8.js"
     ],
     "css": [
-      "assets/Register-DgbDScVJ.css"
+      "assets/Register-CAHJmvAp.css"
     ]
   },
   "resources/js/Pages/Auth/ResetPassword.vue": {
-    "file": "assets/ResetPassword-Dj-Cztni.js",
+    "file": "assets/ResetPassword-D2nT1Kbv.js",
     "name": "ResetPassword",
     "src": "resources/js/Pages/Auth/ResetPassword.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_VTextField-DFvrPu7b.js",
-      "_AuthShell-B2xU3kof.js",
-      "_SubmitButton-BdR4hLCi.js"
+      "_icons-RuIEci8H.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AuthShell-DM41rYk8.js"
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home--r3FuRdT.js",
+    "file": "assets/Home-BflF0Myo.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_AppLayout-kDZxhYDm.js",
-      "_VTextField-DFvrPu7b.js",
-      "_VCheckboxBtn-snHeYV_i.js"
+      "_icons-RuIEci8H.js",
+      "_AppLayout-jXxACfp_.js",
+      "_VAlert-CXBzo4g8.js",
+      "_AppAlerts-CvZC_5Nr.js"
     ],
     "css": [
-      "assets/Home-91COvox7.css"
+      "assets/Home-lXCA35gY.css"
     ]
   },
   "resources/js/Pages/Profile/Edit.vue": {
-    "file": "assets/Edit-BYh-bYKS.js",
+    "file": "assets/Edit-Czz5VG9C.js",
     "name": "Edit",
     "src": "resources/js/Pages/Profile/Edit.vue",
     "isDynamicEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js",
-      "_AppLayout-kDZxhYDm.js",
-      "_VTextField-DFvrPu7b.js",
-      "_SubmitButton-BdR4hLCi.js",
-      "_VCheckboxBtn-snHeYV_i.js",
-      "_VCheckbox-BjI5OXix.js"
+      "_icons-RuIEci8H.js",
+      "_AppLayout-jXxACfp_.js",
+      "_VAlert-CXBzo4g8.js",
+      "resources/js/app.ts",
+      "_CheckboxInput-D0cOv9-k.js",
+      "_AppAlerts-CvZC_5Nr.js"
     ],
     "css": [
-      "assets/Edit-BH10yUnv.css"
+      "assets/Edit-C_9xy8-q.css"
     ]
   },
   "resources/js/app.ts": {
-    "file": "assets/app-C_o0gziS.js",
+    "file": "assets/app-COLolUKG.js",
     "name": "app",
     "src": "resources/js/app.ts",
     "isEntry": true,
     "imports": [
-      "_icons-CR9S7nxO.js"
+      "_icons-RuIEci8H.js"
     ],
     "dynamicImports": [
       "resources/js/Pages/Auth/ConfirmPassword.vue",
@@ -324,7 +304,7 @@
       "resources/js/Pages/Profile/Edit.vue"
     ],
     "css": [
-      "assets/app-D3K-dxGD.css"
+      "assets/app-CdMJQdUP.css"
     ],
     "assets": [
       "assets/jost-cyrillic-400-normal-bVZEi0jL.woff2",

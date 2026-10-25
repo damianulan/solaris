@@ -6,12 +6,14 @@ withDefaults(defineProps<{
     disabled?: boolean;
     loading?: boolean;
     prependIcon?: string;
+    variant?: ButtonVariant;
 }>(), {
     appendIcon: undefined,
     color: 'error',
     disabled: false,
     loading: false,
     prependIcon: undefined,
+    variant: 'tonal',
 });
 </script>
 
@@ -24,8 +26,9 @@ withDefaults(defineProps<{
         :loading="loading"
         :prepend-icon="prependIcon"
         :rounded="false"
+        min-width="155px"
         type="reset"
-        variant="tonal"
+        :variant="variant"
     >
         <template v-if="$slots.prepend" #prepend>
             <slot name="prepend" />

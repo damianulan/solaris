@@ -161,5 +161,12 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
-    'attributes' => [],
+    'attributes' => [
+        'fullname' => 'Imię i nazwisko',
+        'firstname' => 'Imię',
+        'lastname' => 'Nazwisko',
+        'email' => 'Adres e-mail',
+        'username' => 'Nazwa użytkownika',
+        'description' => 'Opis',
+    ],
 ];

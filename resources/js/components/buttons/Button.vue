@@ -28,6 +28,7 @@ withDefaults(defineProps<{
         :prepend-icon="prependIcon"
         :rounded="false"
         type="button"
+        min-width="155px"
         :variant="variant"
     >
         <template v-if="$slots.prepend" #prepend>

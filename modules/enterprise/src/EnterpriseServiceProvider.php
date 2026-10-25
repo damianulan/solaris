@@ -29,6 +29,10 @@ class EnterpriseServiceProvider extends ServiceProvider
             __DIR__ . '/../config/enterprise.php' => config_path('enterprise.php'),
         ], 'modularis');
 
+        $this->publishesMigrations([
+            __DIR__ . '/../database/migrations' => database_path('migrations'),
+        ]);
+
         $this->registerCommands();
 
         $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');

@@ -47,14 +47,14 @@ const {
 </script>
 
 <template>
-    <v-card class="data-table-card" border flat>
+    <v-card class="data-table-card" :border="false" flat>
         <v-expansion-panels
             v-if="table.filters.length > 0"
             v-model="expandedFilterPanel"
             variant="accordion"
         >
             <v-expansion-panel value="filters" :rounded="false">
-                <v-expansion-panel-title :rounded="false" flat>
+                <v-expansion-panel-title class="filter-panel" density="dense" :rounded="false" flat>
                     <span class="d-flex align-center ga-2 font-weight-medium">
                         <v-icon icon="bi-funnel" />
                         {{ translate('frontend.data_table.filters.title') }}
@@ -142,8 +142,12 @@ const {
     border-right-width: 0;
 }
 
-.data-table :deep(.v-table__wrapper > table > thead > tr > th) {
+.data-table :deep(.v-table__wrapper > table > thead > tr > th),
+.filter-panel {
     background: color-mix(in srgb, rgb(var(--v-theme-surface)) 90%, black);
+}
+
+.data-table :deep(.v-table__wrapper > table > thead > tr > th) {
     border: 0;
     border-top: 2px solid rgba(var(--v-border-color), calc(var(--v-border-opacity) * 2));
     border-bottom: 2px solid rgba(var(--v-border-color), calc(var(--v-border-opacity) * 2));
