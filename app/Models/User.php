@@ -113,4 +113,20 @@ class User extends AuthorizableModel
             'suspended_at' => 'datetime',
         ];
     }
+
+    public function syncable(): array
+    {
+        return [
+            'firstname',
+            'lastname',
+            'middlename',
+            'username',
+            'email',
+            'password',
+            'timezone',
+            'auth',
+            'suspended_at',
+            'roles'
+        ];
+    }
 }

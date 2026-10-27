@@ -22,7 +22,7 @@ class ImportUsersCommand extends Command
             ->throw()
             ->collect('data');
 
-        $fillable = array_flip((new User)->getFillable());
+        $fillable = array_flip((new User)->syncable());
 
         $users->each(function (mixed $attributes) use ($fillable): void {
             if (! is_array($attributes)) {
@@ -35,9 +35,9 @@ class ImportUsersCommand extends Command
                 );
             }
 
-            User::query()->updateOrCreate(['username' => $attributes['username']], [
-                array_intersect_key($attributes, $fillable)
-            ]);
+            User::query()->updateOrCreate([
+                'username' => $attributes['username']
+                ], array_intersect_key($attributes, $fillable));
         });
 
         $this->components->info("Imported {$users->count()} users.");

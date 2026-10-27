@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Http\Controllers\AuthController;
+use App\Listeners\AuthenticatedFromClientListener;
 use Fruitcake\LaravelDebugbar\Facades\Debugbar;
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Nexus\Auth\Events\AuthenticatedFromClient;
 use Nexus\Blueprints\Nav\NavigationItem;
 use Nexus\Facades\Nav\Sidebar;
 use Nexus\Http\Controllers\AuthController as NexusAuthController;
@@ -31,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Event::listen(AuthenticatedFromClient::class, AuthenticatedFromClientListener::class);
+
         Sidebar::add(
             NavigationItem::make($this->label('frontend.navigation.home'), 'home', 'bi-house')->setPriority(1000)
         );

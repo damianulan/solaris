@@ -34,7 +34,7 @@ if [ -f ".env" ] && ! grep -q "^APP_KEY=base64:" .env; then
     php artisan key:generate
 fi
 
-git config --global --add safe.directory /var/www
+git config --global --add safe.directory '*'
 chown -R www-data:www-data storage bootstrap/cache
 php artisan storage:link
 

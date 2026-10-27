@@ -65,7 +65,7 @@ namespace App\Models{
  * @method static \Nexus\Auth\Builders\UserBuilder<static>|User whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withTrashed(bool $withTrashed = true)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User withoutTrashed()
- * @mixin \Eloquent
+ * @mixin \Illuminate\Database\Eloquent\Model
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $activeEmployments
  * @property-read int|null $active_employments_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Modules\Enterprise\Models\Employment> $employments
@@ -316,6 +316,25 @@ namespace Nexus\Auth{
  * @mixin \Eloquent
  */
 	class AuthorizableModel extends \Eloquent implements \Illuminate\Contracts\Auth\Authenticatable, \Illuminate\Contracts\Auth\Access\Authorizable, \Illuminate\Contracts\Auth\CanResetPassword {}
+}
+
+namespace Nexus\Monolith\Settings\Models{
+/**
+ * @property-read \Illuminate\Database\Eloquent\Model $model
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PreferenceModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PreferenceModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|PreferenceModel query()
+ */
+	class PreferenceModel extends \Eloquent {}
+}
+
+namespace Nexus\Monolith\Settings\Models{
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|SettingModel query()
+ */
+	class SettingModel extends \Eloquent {}
 }
 
 namespace Sentinel\Models{
